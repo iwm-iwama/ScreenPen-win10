@@ -8,7 +8,7 @@ namespace iwm_ScreenPen
 {
 	public partial class Form1 : Form
 	{
-		/// private const string Ver = "iwm20220625";
+		/// private const string Ver = "iwm20220717";
 
 		// Current
 		private Bitmap Bitmap1 = null;
@@ -21,7 +21,7 @@ namespace iwm_ScreenPen
 		private Pen Pen1 = null;
 		private Color Pen1Color = Color.Empty;
 		private int Pen1Size = 0;
-		private readonly Color[] AryPen1Color = { Color.Red, Color.Blue, Color.Magenta, Color.Lime, Color.Yellow, Color.Cyan };
+		private readonly Color[] AryPen1Color = { Color.Red, Color.Blue, Color.Magenta, Color.Lime, Color.Yellow, Color.Orange, Color.Cyan };
 		private int AryPen1ColorIndex = 0;
 		private readonly int[] AryPen1Size = { 3, 6, 9, 15, 24 };
 		private int AryPen1SizeIndex = 2;
@@ -72,7 +72,7 @@ namespace iwm_ScreenPen
 			PictureBox1.Cursor = CursorPen;
 
 			// ToolTip1 設定
-			ToolTip1.AutomaticDelay = 100;
+			ToolTip1.AutoPopDelay = ToolTip1.AutomaticDelay = 2000;
 			ToolTip1.OwnerDraw = true;
 			ToolTip1.Popup += new PopupEventHandler(ToolTip1_Popup);
 			ToolTip1.Draw += new DrawToolTipEventHandler(ToolTip1_Draw);
@@ -131,7 +131,10 @@ namespace iwm_ScreenPen
 				};
 
 				SubPen1ToolTip(Pen1Color, Pen1Size);
+
+				ToolTip1.AutoPopDelay = 2000;
 				ToolTip1.SetToolTip(PictureBox1, ToolTip1.GetToolTip(PictureBox1));
+				ToolTip1.AutoPopDelay = 0;
 			}
 		}
 
@@ -192,6 +195,9 @@ namespace iwm_ScreenPen
 			// １クリック による描画を回避
 			if (Drag1On && (Drag1X != e.X || Drag1Y != e.Y))
 			{
+				// 描画時は情報非表示
+				ToolTip1.Hide(PictureBox1);
+
 				Graphics1.DrawLine(Pen1, new Point(Drag1X, Drag1Y), new Point(e.X, e.Y));
 				PictureBox1.Refresh();
 
@@ -289,7 +295,10 @@ namespace iwm_ScreenPen
 				}
 			}
 			Opacity = AryOpacity[AryOpacityIndex];
+
+			ToolTip1.AutoPopDelay = 2000;
 			ToolTip1.SetToolTip(PictureBox1, $"透過率 {100 - (int)(AryOpacity[AryOpacityIndex] * 100)}%");
+			ToolTip1.AutoPopDelay = 0;
 		}
 
 		private void SubPen1Resize(bool bUp)
@@ -379,7 +388,9 @@ namespace iwm_ScreenPen
 				PictureBox1.Refresh();
 			}
 
+			ToolTip1.AutoPopDelay = 2000;
 			ToolTip1.SetToolTip(PictureBox1, $"拡大率 {AryImageResize[AryImageResizeIndex] * 100}%");
+			ToolTip1.AutoPopDelay = 0;
 		}
 
 		private void SubPen1ToolTip(Color pen1Color, int pen1Size)
@@ -395,7 +406,9 @@ namespace iwm_ScreenPen
 				EndCap = LineCap.Round
 			};
 
+			ToolTip1.AutoPopDelay = 2000;
 			ToolTip1.SetToolTip(PictureBox1, $"{Pen1Color.Name} {Pen1Size}px");
+			ToolTip1.AutoPopDelay = 0;
 		}
 
 		private void Cms1_Opened(object sender, EventArgs e)
