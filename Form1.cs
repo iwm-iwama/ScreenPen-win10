@@ -8,7 +8,7 @@ namespace iwm_ScreenPen
 {
 	public partial class Form1 : Form
 	{
-		/// private const string Ver = "iwm20220717";
+		/// private const string Ver = "iwm20221030";
 
 		// Current
 		private Bitmap Bitmap1 = null;
@@ -19,12 +19,8 @@ namespace iwm_ScreenPen
 		private Bitmap BitmapResize = null;
 
 		private Pen Pen1 = null;
-		private Color Pen1Color = Color.Empty;
-		private int Pen1Size = 0;
-		private readonly Color[] AryPen1Color = { Color.Red, Color.Blue, Color.Magenta, Color.Lime, Color.Yellow, Color.Orange, Color.Cyan };
-		private int AryPen1ColorIndex = 0;
-		private readonly int[] AryPen1Size = { 3, 6, 9, 15, 24 };
-		private int AryPen1SizeIndex = 2;
+		private Color Pen1Color = Color.Red;
+		private int Pen1Size = 9;
 
 		private Cursor CursorPen = null;
 
@@ -34,9 +30,6 @@ namespace iwm_ScreenPen
 		private int Drag2X = 0, Drag2Y = 0;
 		private int Drag2Type = 0;
 		private readonly int[] Drag2XYWH = { 0, 0, 0, 0 };
-
-		private readonly float[] AryOpacity = { 1.0F, 0.75F, 0.5F, 0.25F };
-		private int AryOpacityIndex = 0;
 
 		public Form1()
 		{
@@ -64,7 +57,7 @@ namespace iwm_ScreenPen
 			BitmapUndo = new Bitmap(Bitmap1);
 
 			// Pen1 設定
-			SubPen1ToolTip(AryPen1Color[AryPen1ColorIndex], AryPen1Size[AryPen1SizeIndex]);
+			SubPen1ToolTip(Pen1Color, Pen1Size);
 
 			// マウスカーソル 設定
 			System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
@@ -239,104 +232,13 @@ namespace iwm_ScreenPen
 			// 上回転 +120
 			if (e.Delta > 0)
 			{
-				if ((Control.ModifierKeys & Keys.Control) == Keys.Control && (Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-				{
-					SubOpacitySelect(true);
-				}
-				else if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-				{
-					SubPen1Resize(true);
-				}
-				else if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-				{
-					SubPen1ColorSelect(true);
-				}
-				else
-				{
-					SubImageResize(true);
-				}
+				SubImageResize(true);
 			}
 			// 下回転 -120
 			else if (e.Delta < 0)
 			{
-				if ((Control.ModifierKeys & Keys.Control) == Keys.Control && (Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-				{
-					SubOpacitySelect(false);
-				}
-				else if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-				{
-					SubPen1Resize(false);
-				}
-				else if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-				{
-					SubPen1ColorSelect(false);
-				}
-				else
-				{
-					SubImageResize(false);
-				}
+				SubImageResize(false);
 			}
-		}
-
-		private void SubOpacitySelect(bool bUp)
-		{
-			if (bUp && AryOpacityIndex == (AryOpacity.Length - 1) || !bUp && AryOpacityIndex == 0)
-			{
-			}
-			else
-			{
-				if (bUp)
-				{
-					++AryOpacityIndex;
-				}
-				else
-				{
-					--AryOpacityIndex;
-				}
-			}
-			Opacity = AryOpacity[AryOpacityIndex];
-
-			ToolTip1.AutoPopDelay = 2000;
-			ToolTip1.SetToolTip(PictureBox1, $"透過率 {100 - (int)(AryOpacity[AryOpacityIndex] * 100)}%");
-			ToolTip1.AutoPopDelay = 0;
-		}
-
-		private void SubPen1Resize(bool bUp)
-		{
-			if (bUp && AryPen1SizeIndex == (AryPen1Size.Length - 1) || !bUp && AryPen1SizeIndex == 0)
-			{
-			}
-			else
-			{
-				if (bUp)
-				{
-					++AryPen1SizeIndex;
-				}
-				else
-				{
-					--AryPen1SizeIndex;
-				}
-			}
-			SubPen1ToolTip(Pen1Color, AryPen1Size[AryPen1SizeIndex]);
-		}
-
-		private void SubPen1ColorSelect(bool bUp)
-		{
-			if (bUp && AryPen1ColorIndex == (AryPen1Color.Length - 1) || !bUp && AryPen1ColorIndex == 0)
-			{
-			}
-			else
-			{
-				if (bUp)
-				{
-					++AryPen1ColorIndex;
-				}
-				else
-				{
-					--AryPen1ColorIndex;
-				}
-			}
-			SubPen1ToolTip(AryPen1Color[AryPen1ColorIndex], Pen1Size);
 		}
 
 		private readonly int[] AryImageResize = { 1, 2, 4, 8 };
@@ -416,6 +318,109 @@ namespace iwm_ScreenPen
 			// Cms1 移動
 			Cms1.Left += 26;
 			Cms1.Top -= 2;
+
+			string s1 = "";
+
+			Cms1_マーカー色_レッド.Checked = false;
+			Cms1_マーカー色_ブルー.Checked = false;
+			Cms1_マーカー色_マゼンタ.Checked = false;
+			Cms1_マーカー色_ライム.Checked = false;
+			Cms1_マーカー色_イエロー.Checked = false;
+			Cms1_マーカー色_オレンジ.Checked = false;
+			Cms1_マーカー色_シアン.Checked = false;
+
+			if (Pen1Color == Color.Red)
+			{
+				Cms1_マーカー色_レッド.Checked = true;
+				s1 = Cms1_マーカー色_レッド.Text;
+			}
+			else if (Pen1Color == Color.Blue)
+			{
+				Cms1_マーカー色_ブルー.Checked = true;
+				s1 = Cms1_マーカー色_ブルー.Text;
+			}
+			else if (Pen1Color == Color.Magenta)
+			{
+				Cms1_マーカー色_マゼンタ.Checked = true;
+				s1 = Cms1_マーカー色_マゼンタ.Text;
+			}
+			else if (Pen1Color == Color.Lime)
+			{
+				Cms1_マーカー色_ライム.Checked = true;
+				s1 = Cms1_マーカー色_ライム.Text;
+			}
+			else if (Pen1Color == Color.Yellow)
+			{
+				Cms1_マーカー色_イエロー.Checked = true;
+				s1 = Cms1_マーカー色_イエロー.Text;
+			}
+			else if (Pen1Color == Color.Orange)
+			{
+				Cms1_マーカー色_オレンジ.Checked = true;
+				s1 = Cms1_マーカー色_オレンジ.Text;
+			}
+			else if (Pen1Color == Color.Cyan)
+			{
+				Cms1_マーカー色_シアン.Checked = true;
+				s1 = Cms1_マーカー色_シアン.Text;
+			}
+
+			Cms1_マーカー色.Text = $"マーカー色（{s1}）";
+
+			Cms1_マーカーサイズ_3px.Checked = false;
+			Cms1_マーカーサイズ_6px.Checked = false;
+			Cms1_マーカーサイズ_9px.Checked = false;
+			Cms1_マーカーサイズ_15px.Checked = false;
+			Cms1_マーカーサイズ_24px.Checked = false;
+
+			switch (Pen1Size)
+			{
+				case 3:
+					Cms1_マーカーサイズ_3px.Checked = true;
+					s1 = Cms1_マーカーサイズ_3px.Text;
+					break;
+				case 6:
+					Cms1_マーカーサイズ_6px.Checked = true;
+					s1 = Cms1_マーカーサイズ_6px.Text;
+					break;
+				case 9:
+					Cms1_マーカーサイズ_9px.Checked = true;
+					s1 = Cms1_マーカーサイズ_9px.Text;
+					break;
+				case 15:
+					Cms1_マーカーサイズ_15px.Checked = true;
+					s1 = Cms1_マーカーサイズ_15px.Text;
+					break;
+				case 24:
+					Cms1_マーカーサイズ_24px.Checked = true;
+					s1 = Cms1_マーカーサイズ_24px.Text;
+					break;
+			}
+
+			Cms1_マーカーサイズ.Text = $"マーカーサイズ（{s1}）";
+
+			Cms1_画面透過_0per.Checked = false;
+			Cms1_画面透過_25per.Checked = false;
+			Cms1_画面透過_50per.Checked = false;
+			Cms1_画面透過_75per.Checked = false;
+
+			switch (Opacity)
+			{
+				case 1.0F:
+					Cms1_画面透過_0per.Checked = true;
+					break;
+				case 0.75F:
+					Cms1_画面透過_25per.Checked = true;
+					break;
+				case 0.5F:
+					Cms1_画面透過_50per.Checked = true;
+					break;
+				case 0.25F:
+					Cms1_画面透過_75per.Checked = true;
+					break;
+			}
+
+			Cms1_画面透過.Text = $"画面透過（{(int)((1.0 - Opacity) * 100)}%）";
 		}
 
 		private void Cms1_スクリーンショット_Click(object sender, EventArgs e)
@@ -450,6 +455,86 @@ namespace iwm_ScreenPen
 			WindowState = FormWindowState.Minimized;
 		}
 
+		private void Cms1_マーカー色_レッド_Click(object sender, EventArgs e)
+		{
+			Pen1Color = Color.Red;
+		}
+
+		private void Cms1_マーカー色_ブルー_Click(object sender, EventArgs e)
+		{
+			Pen1Color = Color.Blue;
+		}
+
+		private void Cms1_マーカー色_マゼンタ_Click(object sender, EventArgs e)
+		{
+			Pen1Color = Color.Magenta;
+		}
+
+		private void Cms1_マーカー色_ライム_Click(object sender, EventArgs e)
+		{
+			Pen1Color = Color.Lime;
+		}
+
+		private void Cms1_マーカー色_イエロー_Click(object sender, EventArgs e)
+		{
+			Pen1Color = Color.Yellow;
+		}
+
+		private void Cms1_マーカー色_オレンジ_Click(object sender, EventArgs e)
+		{
+			Pen1Color = Color.Orange;
+		}
+
+		private void Cms1_マーカー色_シアン_Click(object sender, EventArgs e)
+		{
+			Pen1Color = Color.Cyan;
+		}
+
+		private void Cms1_マーカーサイズ_3px_Click(object sender, EventArgs e)
+		{
+			Pen1Size = 3;
+		}
+
+		private void Cms1_マーカーサイズ_6px_Click(object sender, EventArgs e)
+		{
+			Pen1Size = 6;
+		}
+
+		private void Cms1_マーカーサイズ_9px_Click(object sender, EventArgs e)
+		{
+			Pen1Size = 9;
+		}
+
+		private void Cms1_マーカーサイズ_15px_Click(object sender, EventArgs e)
+		{
+			Pen1Size = 15;
+		}
+
+		private void Cms1_マーカーサイズ_24px_Click(object sender, EventArgs e)
+		{
+			Pen1Size = 24;
+		}
+
+		private void Cms1_画面透過_0per_Click(object sender, EventArgs e)
+		{
+			Opacity = 1.0F;
+		}
+
+		private void Cms1_画面透過_25per_Click(object sender, EventArgs e)
+		{
+			Opacity = 0.75F;
+		}
+
+		private void Cms1_画面透過_50per_Click(object sender, EventArgs e)
+		{
+			Opacity = 0.5F;
+		}
+
+		private void Cms1_画面透過_75per_Click(object sender, EventArgs e)
+		{
+			Opacity = 0.25F;
+		}
+
 		private void Cms1_画像を保存_Click(object sender, EventArgs e)
 		{
 			SaveFileDialog sfd = new SaveFileDialog
@@ -469,21 +554,13 @@ namespace iwm_ScreenPen
 		private void Cms1_操作説明_Click(object sender, EventArgs e)
 		{
 			_ = MessageBox.Show(
-				"・[左クリック]\n" +
-				"　　ペン色・太さの情報を表示\n\n" +
 				"・[左クリック] ＋ [ドラッグ]\n" +
 				"　　フリーハンド描画\n\n" +
 				"・[左ダブルクリック]\n" +
 				"　　四角、円、矢印、線を描画\n" +
-				"　　マウスカーソルで範囲指定、左クリックで描画\n\n" +
+				"　　描画種を選択、マウスカーソルで範囲指定、左クリックで決定\n\n" +
 				"・[マウスホイール]\n" +
-				"　　拡大率を変更\n\n" +
-				"・[Ctrl] ＋ [マウスホイール]\n" +
-				"　　ペン色を変更\n\n" +
-				"・[Shift] ＋ [マウスホイール]\n" +
-				"　　ペン太さを変更\n\n" +
-				"・[Ctrl] ＋ [Shift] ＋ [マウスホイール]\n" +
-				"　　透過率を変更\n\n",
+				"　　拡大率を変更\n\n",
 				"操作説明 - iwm_ScreenPen"
 			);
 		}
