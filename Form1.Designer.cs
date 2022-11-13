@@ -32,6 +32,8 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.PictureBox1 = new System.Windows.Forms.PictureBox();
 			this.Cms1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.Cms1_クリア = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.Cms1_マーカー色 = new System.Windows.Forms.ToolStripMenuItem();
 			this.Cms1_マーカー色_レッド = new System.Windows.Forms.ToolStripMenuItem();
 			this.Cms1_マーカー色_ブルー = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,14 +53,13 @@
 			this.Cms1_画面透過_25per = new System.Windows.Forms.ToolStripMenuItem();
 			this.Cms1_画面透過_50per = new System.Windows.Forms.ToolStripMenuItem();
 			this.Cms1_画面透過_75per = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.Cms1_スクリーンショット = new System.Windows.Forms.ToolStripMenuItem();
-			this.Cms1_クリア = new System.Windows.Forms.ToolStripMenuItem();
-			this.Cms1_最小化 = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.Cms1_スクリーンショット = new System.Windows.Forms.ToolStripMenuItem();
+			this.Cms1_最小化 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.Cms1_画像を保存 = new System.Windows.Forms.ToolStripMenuItem();
 			this.Cms1_操作説明 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.Cms1_閉じる = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.Cms2 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -97,21 +98,35 @@
 			// 
 			this.Cms1.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.Cms1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Cms1_クリア,
+            this.toolStripSeparator1,
             this.Cms1_マーカー色,
             this.Cms1_マーカーサイズ,
             this.Cms1_画面透過,
-            this.toolStripSeparator1,
-            this.Cms1_スクリーンショット,
-            this.Cms1_クリア,
-            this.Cms1_最小化,
             this.toolStripSeparator2,
+            this.Cms1_スクリーンショット,
+            this.Cms1_最小化,
+            this.toolStripSeparator3,
             this.Cms1_画像を保存,
             this.Cms1_操作説明,
-            this.toolStripSeparator3,
+            this.toolStripSeparator4,
             this.Cms1_閉じる});
 			this.Cms1.Name = "contextMenuStrip1";
-			this.Cms1.Size = new System.Drawing.Size(153, 220);
+			this.Cms1.Size = new System.Drawing.Size(153, 226);
 			this.Cms1.Opened += new System.EventHandler(this.Cms1_Opened);
+			// 
+			// Cms1_クリア
+			// 
+			this.Cms1_クリア.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_クリア.Image")));
+			this.Cms1_クリア.Name = "Cms1_クリア";
+			this.Cms1_クリア.Size = new System.Drawing.Size(152, 22);
+			this.Cms1_クリア.Text = "クリア";
+			this.Cms1_クリア.Click += new System.EventHandler(this.Cms1_クリア_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
 			// 
 			// Cms1_マーカー色
 			// 
@@ -125,7 +140,7 @@
             this.Cms1_マーカー色_シアン});
 			this.Cms1_マーカー色.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色.Image")));
 			this.Cms1_マーカー色.Name = "Cms1_マーカー色";
-			this.Cms1_マーカー色.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_マーカー色.Size = new System.Drawing.Size(152, 22);
 			this.Cms1_マーカー色.Text = "マーカー色";
 			// 
 			// Cms1_マーカー色_レッド
@@ -194,7 +209,7 @@
             this.Cms1_マーカーサイズ_24px});
 			this.Cms1_マーカーサイズ.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカーサイズ.Image")));
 			this.Cms1_マーカーサイズ.Name = "Cms1_マーカーサイズ";
-			this.Cms1_マーカーサイズ.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_マーカーサイズ.Size = new System.Drawing.Size(152, 22);
 			this.Cms1_マーカーサイズ.Text = "マーカーサイズ";
 			// 
 			// Cms1_マーカーサイズ_3px
@@ -241,7 +256,7 @@
             this.Cms1_画面透過_75per});
 			this.Cms1_画面透過.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_画面透過.Image")));
 			this.Cms1_画面透過.Name = "Cms1_画面透過";
-			this.Cms1_画面透過.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_画面透過.Size = new System.Drawing.Size(152, 22);
 			this.Cms1_画面透過.Text = "画面透過";
 			// 
 			// Cms1_画面透過_0per
@@ -272,10 +287,10 @@
 			this.Cms1_画面透過_75per.Text = "75%";
 			this.Cms1_画面透過_75per.Click += new System.EventHandler(this.Cms1_画面透過_75per_Click);
 			// 
-			// toolStripSeparator1
+			// toolStripSeparator2
 			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
 			// 
 			// Cms1_スクリーンショット
 			// 
@@ -284,36 +299,28 @@
 			this.Cms1_スクリーンショット.ForeColor = System.Drawing.Color.White;
 			this.Cms1_スクリーンショット.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_スクリーンショット.Image")));
 			this.Cms1_スクリーンショット.Name = "Cms1_スクリーンショット";
-			this.Cms1_スクリーンショット.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_スクリーンショット.Size = new System.Drawing.Size(152, 22);
 			this.Cms1_スクリーンショット.Text = "スクリーンショット";
 			this.Cms1_スクリーンショット.Click += new System.EventHandler(this.Cms1_スクリーンショット_Click);
-			// 
-			// Cms1_クリア
-			// 
-			this.Cms1_クリア.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_クリア.Image")));
-			this.Cms1_クリア.Name = "Cms1_クリア";
-			this.Cms1_クリア.Size = new System.Drawing.Size(180, 22);
-			this.Cms1_クリア.Text = "クリア";
-			this.Cms1_クリア.Click += new System.EventHandler(this.Cms1_クリア_Click);
 			// 
 			// Cms1_最小化
 			// 
 			this.Cms1_最小化.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_最小化.Image")));
 			this.Cms1_最小化.Name = "Cms1_最小化";
-			this.Cms1_最小化.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_最小化.Size = new System.Drawing.Size(152, 22);
 			this.Cms1_最小化.Text = "最小化";
 			this.Cms1_最小化.Click += new System.EventHandler(this.Cms1_最小化_Click);
 			// 
-			// toolStripSeparator2
+			// toolStripSeparator3
 			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
 			// 
 			// Cms1_画像を保存
 			// 
 			this.Cms1_画像を保存.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_画像を保存.Image")));
 			this.Cms1_画像を保存.Name = "Cms1_画像を保存";
-			this.Cms1_画像を保存.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_画像を保存.Size = new System.Drawing.Size(152, 22);
 			this.Cms1_画像を保存.Text = "画像を保存";
 			this.Cms1_画像を保存.Click += new System.EventHandler(this.Cms1_画像を保存_Click);
 			// 
@@ -321,14 +328,14 @@
 			// 
 			this.Cms1_操作説明.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_操作説明.Image")));
 			this.Cms1_操作説明.Name = "Cms1_操作説明";
-			this.Cms1_操作説明.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_操作説明.Size = new System.Drawing.Size(152, 22);
 			this.Cms1_操作説明.Text = "操作説明";
 			this.Cms1_操作説明.Click += new System.EventHandler(this.Cms1_操作説明_Click);
 			// 
-			// toolStripSeparator3
+			// toolStripSeparator4
 			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
 			// 
 			// Cms1_閉じる
 			// 
@@ -336,7 +343,7 @@
 			this.Cms1_閉じる.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_閉じる.Image")));
 			this.Cms1_閉じる.ImageTransparentColor = System.Drawing.Color.Transparent;
 			this.Cms1_閉じる.Name = "Cms1_閉じる";
-			this.Cms1_閉じる.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_閉じる.Size = new System.Drawing.Size(152, 22);
 			this.Cms1_閉じる.Text = "閉じる";
 			this.Cms1_閉じる.Click += new System.EventHandler(this.Cms1_閉じる_Click);
 			// 
@@ -418,7 +425,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
-			this.BackColor = System.Drawing.Color.White;
+			this.BackColor = System.Drawing.Color.DimGray;
 			this.ClientSize = new System.Drawing.Size(298, 298);
 			this.ControlBox = false;
 			this.Controls.Add(this.PictureBox1);
@@ -444,6 +451,8 @@
 		private System.Windows.Forms.PictureBox PictureBox1;
 		private System.Windows.Forms.ToolTip ToolTip1;
 		private System.Windows.Forms.ContextMenuStrip Cms1;
+		private System.Windows.Forms.ToolStripMenuItem Cms1_クリア;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_マーカー色;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_マーカー色_レッド;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_マーカー色_ブルー;
@@ -463,14 +472,13 @@
 		private System.Windows.Forms.ToolStripMenuItem Cms1_画面透過_25per;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_画面透過_50per;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_画面透過_75per;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripMenuItem Cms1_スクリーンショット;
-		private System.Windows.Forms.ToolStripMenuItem Cms1_クリア;
-		private System.Windows.Forms.ToolStripMenuItem Cms1_最小化;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripMenuItem Cms1_スクリーンショット;
+		private System.Windows.Forms.ToolStripMenuItem Cms1_最小化;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_画像を保存;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_操作説明;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_閉じる;
 		private System.Windows.Forms.ContextMenuStrip Cms2;
 		private System.Windows.Forms.ToolStripMenuItem Cms2_四角;

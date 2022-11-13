@@ -8,7 +8,7 @@ namespace iwm_ScreenPen
 {
 	public partial class Form1 : Form
 	{
-		/// private const string Ver = "iwm20221030";
+		private const string Cmd = "iwm_ScreenPen Ver.20221113";
 
 		// Current
 		private Bitmap Bitmap1 = null;
@@ -561,7 +561,7 @@ namespace iwm_ScreenPen
 				"　　描画種を選択、マウスカーソルで範囲指定、左クリックで決定\n\n" +
 				"・[マウスホイール]\n" +
 				"　　拡大率を変更\n\n",
-				"操作説明 - iwm_ScreenPen"
+				$"操作説明 - {Cmd}"
 			);
 		}
 
