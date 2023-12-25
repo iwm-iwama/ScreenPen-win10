@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 //using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -8,13 +9,16 @@ namespace iwm_ScreenPen
 {
 	public partial class Form1 : Form
 	{
-		private const string Cmd = "iwm_ScreenPen Ver.20221113";
+		private const string COPYRIGHT = "(C)2022-2023 iwm-iwama";
+		private const string VERSION = "iwm_ScreenPen_20231224";
 
 		// Current
 		private Bitmap Bitmap1 = null;
 		private Graphics Graphics1 = null;
 
-		private Bitmap BitmapUndo = null;
+		private readonly List<Bitmap> ListBitmap = new List<Bitmap>();
+		private int ListBitmapCurIndex = 0;
+
 		private Bitmap BitmapCms2 = null;
 		private Bitmap BitmapResize = null;
 
@@ -31,6 +35,11 @@ namespace iwm_ScreenPen
 		private int Drag2Type = 0;
 		private readonly int[] Drag2XYWH = { 0, 0, 0, 0 };
 
+		private int GblWidth = 0;
+		private int GblHeight = 0;
+		private int GblLeft = 0;
+		private int GblTop = 0;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -43,10 +52,10 @@ namespace iwm_ScreenPen
 		{
 			// Form1 設定
 			TopMost = true;
-			Left = SystemInformation.WorkingArea.Left;
-			Top = SystemInformation.WorkingArea.Top;
-			Width = SystemInformation.WorkingArea.Width;
-			Height = SystemInformation.WorkingArea.Height;
+			Width = GblWidth = SystemInformation.WorkingArea.Width;
+			Height = GblHeight = SystemInformation.WorkingArea.Height;
+			Left = GblLeft = SystemInformation.WorkingArea.Left;
+			Top = GblTop = SystemInformation.WorkingArea.Top;
 
 			// PictureBox1 初期化
 			Bitmap1 = new Bitmap(Width, Height);
@@ -54,7 +63,10 @@ namespace iwm_ScreenPen
 			Graphics1.FillRectangle(Brushes.Black, 0, 0, Width, Height);
 			PictureBox1.BackgroundImage = Bitmap1;
 			PictureBox1.Refresh();
-			BitmapUndo = new Bitmap(Bitmap1);
+
+			// 履歴を初期化
+			ListBitmap.Add(new Bitmap(Bitmap1));
+			ListBitmapCurIndex = 0;
 
 			// Pen1 設定
 			SubPen1ToolTip(Pen1Color, Pen1Size);
@@ -69,11 +81,39 @@ namespace iwm_ScreenPen
 			ToolTip1.OwnerDraw = true;
 			ToolTip1.Popup += new PopupEventHandler(ToolTip1_Popup);
 			ToolTip1.Draw += new DrawToolTipEventHandler(ToolTip1_Draw);
+
+			// 操作説明
+			LblHelp.Visible = false;
+			LblHelp.Text =
+				$"{VERSION}   {COPYRIGHT}\n\n" +
+				"【操作説明】\n\n" +
+				"  [右クリック]\n" +
+				"    コンテキストメニュー\n\n" +
+				"  [Space]\n" +
+				"    スクリーンショット\n\n" +
+				"  [左クリック]＋[ドラッグ]\n" +
+				"    フリーハンド描画\n\n" +
+				"  [左ダブルクリック]\n" +
+				"    四角／円／矢印／線を描画\n" +
+				"    描画種を選択、マウスカーソルで範囲指定、左クリックで決定\n\n" +
+				"  [マウスホイール]\n" +
+				"    拡大率を変更\n\n" +
+				"  [四隅の青色／オレンジ色ボタン]\n" +
+				"    最小化／元に戻す\n\n" +
+				"  [F9／F10]\n" +
+				"    透過率を上げる／下げる\n\n" +
+				"  [F11／F12]\n" +
+				"    前／次の履歴画面へ移動\n";
+			LblHelp.Left = (Width - LblHelp.Width) / 2;
+			LblHelp.Top = (Height - LblHelp.Height) / 2;
+
+			// BtnFormSizeChange1 表示
+			BtnFormSizeChange1.Text = BtnFormSizeChange2.Text = BtnFormSizeChange3.Text = BtnFormSizeChange4.Text = "✕";
 		}
 
 		private void Form1_Shown(object sender, EventArgs e)
 		{
-			// コンテキストメニュー 表示
+			// コンテキストメニュー表示
 			Cursor.Position = new Point((int)((Screen.PrimaryScreen.Bounds.Width * 0.5) - (Cms1.Width * 0.5)), (int)((Screen.PrimaryScreen.Bounds.Height * 0.25)));
 			Cms1.Show(Cursor.Position);
 		}
@@ -83,8 +123,12 @@ namespace iwm_ScreenPen
 			_ = PictureBox1.Focus();
 		}
 
+		private bool Gbl_PictureBox1_DoubleClick_On = false;
+
 		private void PictureBox1_DoubleClick(object sender, EventArgs e)
 		{
+			Gbl_PictureBox1_DoubleClick_On = true;
+
 			if (Drag2Type == 0)
 			{
 				Point cp = PointToClient(Cursor.Position);
@@ -110,7 +154,7 @@ namespace iwm_ScreenPen
 			}
 
 			// 左クリック でフリーハンド描画
-			if ((MouseButtons & MouseButtons.Left) == MouseButtons.Left)
+			if (e.Button == MouseButtons.Left)
 			{
 				Drag1On = true;
 				Drag1X = e.X;
@@ -224,7 +268,23 @@ namespace iwm_ScreenPen
 
 		private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
 		{
-			Drag1On = false;
+			if (Gbl_PictureBox1_DoubleClick_On)
+			{
+				// ダブルクリックの１度目はシングルクリックとして(後述)画面保存するため、その画像を削除しておく。
+				ListBitmap.RemoveAt(ListBitmap.Count - 1);
+				// インデックス末尾
+				ListBitmapCurIndex = ListBitmap.Count - 1;
+				return;
+			}
+
+			switch (e.Button)
+			{
+				case MouseButtons.Left:
+					Drag1On = false;
+					ListBitmap.Add(new Bitmap(Bitmap1));
+					ListBitmapCurIndex = ListBitmap.Count - 1;
+					break;
+			}
 		}
 
 		private void Form_MouseWheel(object sender, MouseEventArgs e)
@@ -313,11 +373,64 @@ namespace iwm_ScreenPen
 			ToolTip1.AutoPopDelay = 0;
 		}
 
+		private void PictureBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+		{
+			switch (e.KeyCode)
+			{
+				// スクリーンショット
+				case Keys.Space:
+					Cms1_スクリーンショット_Click(sender, null);
+					break;
+
+				// 透過率 +25%
+				case Keys.F9:
+					Opacity -= 0.25F;
+					if (Opacity < 0.25F)
+					{
+						Opacity = 0.25F;
+					}
+					break;
+
+				// 透過率 -25%
+				case Keys.F10:
+					Opacity += 0.25F;
+					if (Opacity > 1.0F)
+					{
+						Opacity = 1.0F;
+					}
+					break;
+
+				// Undo
+				case Keys.F11:
+					--ListBitmapCurIndex;
+					if (ListBitmapCurIndex < 0)
+					{
+						ListBitmapCurIndex = 0;
+						return;
+					}
+					break;
+
+				// Redo
+				case Keys.F12:
+					++ListBitmapCurIndex;
+					if (ListBitmapCurIndex >= ListBitmap.Count)
+					{
+						ListBitmapCurIndex = ListBitmap.Count - 1;
+						return;
+					}
+					break;
+			}
+
+			Graphics1.DrawImage(ListBitmap[ListBitmapCurIndex], 0, 0);
+			PictureBox1.BackgroundImage = Bitmap1;
+			PictureBox1.Refresh();
+		}
+
 		private void Cms1_Opened(object sender, EventArgs e)
 		{
 			// Cms1 移動
-			Cms1.Left += 26;
-			Cms1.Top -= 2;
+			Cms1.Left -= 4;
+			Cms1.Top += 32;
 
 			string s1 = "";
 
@@ -423,38 +536,6 @@ namespace iwm_ScreenPen
 			Cms1_画面透過.Text = $"画面透過（{(int)((1.0 - Opacity) * 100)}%）";
 		}
 
-		private void Cms1_スクリーンショット_Click(object sender, EventArgs e)
-		{
-			Visible = false;
-			Graphics1.CopyFromScreen(new Point(Left + 1, Top + 1), new Point(0, 0), Bitmap1.Size);
-			PictureBox1.BackgroundImage = Bitmap1;
-			PictureBox1.Refresh();
-			BitmapUndo = new Bitmap(Bitmap1);
-			Visible = true;
-
-			// 100%画面
-			AryImageResizeIndex = 0;
-
-			GC.Collect();
-		}
-
-		private void Cms1_クリア_Click(object sender, EventArgs e)
-		{
-			Graphics1.DrawImage(BitmapUndo, 0, 0);
-			PictureBox1.BackgroundImage = Bitmap1;
-			PictureBox1.Refresh();
-
-			// 100%画面
-			AryImageResizeIndex = 0;
-
-			GC.Collect();
-		}
-
-		private void Cms1_最小化_Click(object sender, EventArgs e)
-		{
-			WindowState = FormWindowState.Minimized;
-		}
-
 		private void Cms1_マーカー色_レッド_Click(object sender, EventArgs e)
 		{
 			Pen1Color = Color.Red;
@@ -535,6 +616,44 @@ namespace iwm_ScreenPen
 			Opacity = 0.25F;
 		}
 
+		private void Cms1_スクリーンショット_Click(object sender, EventArgs e)
+		{
+			// スクリーンショット
+			Visible = false;
+			Graphics1.CopyFromScreen(new Point(Left + 1, Top + 1), new Point(0, 0), Bitmap1.Size);
+			Visible = true;
+
+			// 履歴に追加
+			ListBitmap.Add(new Bitmap(Bitmap1));
+			ListBitmapCurIndex = ListBitmap.Count - 1;
+
+			// 100%画面
+			AryImageResizeIndex = 0;
+		}
+
+		private void Cms1_クリア_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				Graphics1.FillRectangle(Brushes.Black, 0, 0, Width, Height);
+				PictureBox1.BackgroundImage = Bitmap1;
+				PictureBox1.Refresh();
+
+				// 履歴をクリア
+				ListBitmap.Clear();
+				ListBitmap.Add(new Bitmap(Bitmap1));
+				ListBitmapCurIndex = 0;
+
+				GC.Collect();
+			}
+			catch
+			{
+			}
+
+			// 100%画面
+			AryImageResizeIndex = 0;
+		}
+
 		private void Cms1_画像を保存_Click(object sender, EventArgs e)
 		{
 			SaveFileDialog sfd = new SaveFileDialog
@@ -553,16 +672,7 @@ namespace iwm_ScreenPen
 
 		private void Cms1_操作説明_Click(object sender, EventArgs e)
 		{
-			_ = MessageBox.Show(
-				"・[左クリック] ＋ [ドラッグ]\n" +
-				"　　フリーハンド描画\n\n" +
-				"・[左ダブルクリック]\n" +
-				"　　四角、円、矢印、線を描画\n" +
-				"　　描画種を選択、マウスカーソルで範囲指定、左クリックで決定\n\n" +
-				"・[マウスホイール]\n" +
-				"　　拡大率を変更\n\n",
-				$"操作説明 - {Cmd}"
-			);
+			LblHelp.Visible = LblHelp.Visible ? false : true;
 		}
 
 		private void Cms1_閉じる_Click(object sender, EventArgs e)
@@ -573,6 +683,11 @@ namespace iwm_ScreenPen
 		private void Cms2_Opened(object sender, EventArgs e)
 		{
 			Drag2Type = 0;
+		}
+
+		private void Cms2_Closed(object sender, ToolStripDropDownClosedEventArgs e)
+		{
+			Gbl_PictureBox1_DoubleClick_On = false;
 		}
 
 		private void Cms2_MouseLeave(object sender, EventArgs e)
@@ -665,6 +780,85 @@ namespace iwm_ScreenPen
 			using (Font font = new Font(ToolTip1FotType, ToolTip1FontSize))
 			{
 				e.Graphics.DrawString(e.ToolTipText, font, new SolidBrush(Pen1Color), new PointF(10, 1));
+			}
+		}
+
+		private void LblHelp_Click(object sender, EventArgs e)
+		{
+			LblHelp.Visible = false;
+		}
+
+		private void BtnFormSizeChange1_Click(object sender, EventArgs e)
+		{
+			SubBtnFormSizeChange("1");
+		}
+
+		private void BtnFormSizeChange2_Click(object sender, EventArgs e)
+		{
+			SubBtnFormSizeChange("2");
+		}
+
+		private void BtnFormSizeChange3_Click(object sender, EventArgs e)
+		{
+			SubBtnFormSizeChange("3");
+		}
+
+		private void BtnFormSizeChange4_Click(object sender, EventArgs e)
+		{
+			SubBtnFormSizeChange("4");
+		}
+
+		private bool GblFormSizeMax = true;
+
+		private void SubBtnFormSizeChange(string sId)
+		{
+			string sName = $"BtnFormSizeChange{sId}";
+			Control ctrl = Controls[sName];
+
+			if (GblFormSizeMax)
+			{
+				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = false;
+				BtnFormSizeChange1.Text = BtnFormSizeChange2.Text = BtnFormSizeChange3.Text = BtnFormSizeChange4.Text = "□";
+				GblFormSizeMax = false;
+				Width = ctrl.Width + 1;
+				Height = ctrl.Height + 1;
+
+				switch (sName.Substring(sName.Length - 1))
+				{
+					case "1":
+						Left = GblLeft;
+						Top = GblTop;
+						break;
+
+					case "2":
+						Left = GblLeft + GblWidth - Width;
+						Top = GblTop;
+						break;
+
+					case "3":
+						Left = GblLeft;
+						Top = GblTop + GblHeight - Height;
+						break;
+
+					case "4":
+						Left = GblLeft + GblWidth - Width;
+						Top = GblTop + GblHeight - Height;
+						break;
+				}
+
+				ctrl.BackColor = Color.DarkOrange;
+				ctrl.Visible = true;
+			}
+			else
+			{
+				GblFormSizeMax = true;
+				Width = GblWidth;
+				Height = GblHeight;
+				Left = GblLeft;
+				Top = GblTop;
+				BtnFormSizeChange1.BackColor = BtnFormSizeChange2.BackColor = BtnFormSizeChange3.BackColor = BtnFormSizeChange4.BackColor = Color.MidnightBlue;
+				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = true;
+				BtnFormSizeChange1.Text = BtnFormSizeChange2.Text = BtnFormSizeChange3.Text = BtnFormSizeChange4.Text = "✕";
 			}
 		}
 
