@@ -133,49 +133,49 @@
         vqxQeQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Cms1_マーカー色_レッド.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Cms1_マーカー色0.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAACRJREFUOE9j+E8hoJ4Bb2VUSMIwMGrAqAEgMJwMIBdQaMD//wAE+vcfyHs2OwAA
         AABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Cms1_マーカー色_ブルー.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Cms1_マーカー色1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAFNJREFUOE+tjDEKwDAQw/L/T1+7yHQwgiYRCDQYrznk3sF664+QbCMTkm1kQrKN
         TEi2kQnJNjIh2UYmJNvIhGQbmZBsIxOSbWRCso1M+OQehwczD2Vg3T/77LlvAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="Cms1_マーカー色_マゼンタ.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Cms1_マーカー色2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAFFJREFUOE+tjMEJwDAQw7r/0lcCAgd/RJsIBHoYP3PIxYNVX4RkD0xI9sCEZA9M
         SPbAhGQPTEj2wIRkD0xI9sCEZA9MSPbAhGQPTNjyH4cHMy+pJGy+nMfNsQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Cms1_マーカー色_ライム.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Cms1_マーカー色3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAACJJREFUOE9j+E8hoJ4BDCRCGBg1YNQAEBhOBpALKDTg/38A9NDdPwYl7oEAAAAA
         SUVORK5CYII=
 </value>
   </data>
-  <data name="Cms1_マーカー色_イエロー.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Cms1_マーカー色4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAFRJREFUOE+tjMEJwDAQw7L/uF3g0odAH2NoE4FAD+M1h1w8eN78Ilhp1AQrjZpg
         pVETrDRqgpVGTbDSqAlWGjXBSqMmWGnUBCuNmmClUROsnxwezGxZmmVuon6QgAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Cms1_マーカー色_オレンジ.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Cms1_マーカー色5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAACNJREFUOE9j+E8hoKIB9eqkYSgYNWDUABAYVgaQCSg04P9/AFMxOq4dElVfAAAA
         AElFTkSuQmCC
 </value>
   </data>
-  <data name="Cms1_マーカー色_シアン.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Cms1_マーカー色6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAACRJREFUOE9j+E8hoJ4BDOvek4RhYNSAUQNAYDgZQC6g0ID//wEsazYuoAWrcQAA
@@ -244,7 +244,7 @@
         SUVORK5CYII=
 </value>
   </data>
-  <data name="Cms1_閉じる.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Cms1_終了.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACXSURBVDhPzZJLDoAgDERJ1BMRcUmEM3hDPwv1duyR8jFB

@@ -9,8 +9,36 @@ namespace iwm_ScreenPen
 {
 	public partial class Form1 : Form
 	{
-		private const string COPYRIGHT = "(C)2022-2023 iwm-iwama";
-		private const string VERSION = "iwm_ScreenPen_20231224";
+		private const string COPYRIGHT = "(C)2022-2024 iwm-iwama";
+		private const string VERSION = "iwm_ScreenPen_20240103";
+
+		// Global
+		private static readonly Color GblPic1MaxBtnColor = Color.DarkBlue;
+		private static readonly Color GblPic1MinBtnColor = Color.Crimson;
+
+		private static readonly Color[] GblAryMarkerColor = {
+			Color.Red,     // [0]
+			Color.Blue,    // [1]
+			Color.Magenta, // [2]
+			Color.Lime,    // [3]
+			Color.Yellow,  // [4]
+			Color.Orange,  // [5]
+			Color.Cyan     // [6]
+		};
+
+		private readonly List<ToolStripMenuItem> GblListCms1MarkerColor = new List<ToolStripMenuItem>();
+
+		private static readonly int[] GblAryMarkerSize = {
+			3,  // [0]
+			6,  // [1]
+			9,  // [2]
+			15, // [3]
+			24  // [4]
+		};
+
+		private readonly List<ToolStripMenuItem> GblListCms1MarkerSize = new List<ToolStripMenuItem>();
+
+		private readonly List<ToolStripMenuItem> GblListCms1Opacity = new List<ToolStripMenuItem>();
 
 		// Current
 		private Bitmap Bitmap1 = null;
@@ -22,9 +50,9 @@ namespace iwm_ScreenPen
 		private Bitmap BitmapCms2 = null;
 		private Bitmap BitmapResize = null;
 
-		private Pen Pen1 = null;
-		private Color Pen1Color = Color.Red;
-		private int Pen1Size = 9;
+		private Pen Marker1 = null;
+		private Color Marker1Color = GblAryMarkerColor[0];
+		private int Marker1Size = GblAryMarkerSize[2];
 
 		private Cursor CursorPen = null;
 
@@ -64,12 +92,15 @@ namespace iwm_ScreenPen
 			PictureBox1.BackgroundImage = Bitmap1;
 			PictureBox1.Refresh();
 
+			// ボタン色
+			BtnFormSizeChange1.BackColor = BtnFormSizeChange2.BackColor = BtnFormSizeChange3.BackColor = BtnFormSizeChange4.BackColor = GblPic1MaxBtnColor;
+
 			// 履歴を初期化
 			ListBitmap.Add(new Bitmap(Bitmap1));
 			ListBitmapCurIndex = 0;
 
-			// Pen1 設定
-			SubPen1ToolTip(Pen1Color, Pen1Size);
+			// Marker1 設定
+			SubMarker1ToolTip(Marker1Color, Marker1Size);
 
 			// マウスカーソル 設定
 			System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
@@ -82,10 +113,59 @@ namespace iwm_ScreenPen
 			ToolTip1.Popup += new PopupEventHandler(ToolTip1_Popup);
 			ToolTip1.Draw += new DrawToolTipEventHandler(ToolTip1_Draw);
 
+			// Cms1 マーカー色
+			GblListCms1MarkerColor.Add(Cms1_マーカー色0);
+			GblListCms1MarkerColor.Add(Cms1_マーカー色1);
+			GblListCms1MarkerColor.Add(Cms1_マーカー色2);
+			GblListCms1MarkerColor.Add(Cms1_マーカー色3);
+			GblListCms1MarkerColor.Add(Cms1_マーカー色4);
+			GblListCms1MarkerColor.Add(Cms1_マーカー色5);
+			GblListCms1MarkerColor.Add(Cms1_マーカー色6);
+
+			for (int _i1 = 0; _i1 < GblListCms1MarkerColor.Count; _i1++)
+			{
+				GblListCms1MarkerColor[_i1].Text = GblAryMarkerColor[_i1].Name;
+			}
+
+			// Cms1 マーカーサイズ
+			GblListCms1MarkerSize.Add(Cms1_マーカーサイズ0);
+			GblListCms1MarkerSize.Add(Cms1_マーカーサイズ1);
+			GblListCms1MarkerSize.Add(Cms1_マーカーサイズ2);
+			GblListCms1MarkerSize.Add(Cms1_マーカーサイズ3);
+			GblListCms1MarkerSize.Add(Cms1_マーカーサイズ4);
+
+			for (int _i1 = 0; _i1 < GblListCms1MarkerSize.Count; _i1++)
+			{
+				GblListCms1MarkerSize[_i1].Text = GblAryMarkerSize[_i1] + "px";
+			}
+
+			// Cms1 画面透過
+			GblListCms1Opacity.Add(Cms1_画面透過_0per);
+			GblListCms1Opacity.Add(Cms1_画面透過_25per);
+			GblListCms1Opacity.Add(Cms1_画面透過_50per);
+			GblListCms1Opacity.Add(Cms1_画面透過_75per);
+
 			// 操作説明
 			LblHelp.Visible = false;
+
+			int i1 = 0;
+			string s1 = "";
+			for (; i1 < GblAryMarkerColor.Length - 1; i1++)
+			{
+				s1 += GblAryMarkerColor[i1].Name + ", ";
+			}
+			s1 += GblAryMarkerColor[i1].Name;
+
+			int i2 = 0;
+			string s2 = "";
+			for (; i2 < GblAryMarkerSize.Length - 1; i2++)
+			{
+				s2 += GblAryMarkerSize[i2] + "px, ";
+			}
+			s2 += GblAryMarkerSize[i2] + "px";
+
 			LblHelp.Text =
-				$"{VERSION}   {COPYRIGHT}\n\n" +
+				$"{VERSION}  {COPYRIGHT}\n\n" +
 				"【操作説明】\n\n" +
 				"  [右クリック]\n" +
 				"    コンテキストメニュー\n\n" +
@@ -98,17 +178,22 @@ namespace iwm_ScreenPen
 				"    描画種を選択、マウスカーソルで範囲指定、左クリックで決定\n\n" +
 				"  [マウスホイール]\n" +
 				"    拡大率を変更\n\n" +
-				"  [四隅の青色／オレンジ色ボタン]\n" +
+				"  [四隅のボタン]\n" +
 				"    最小化／元に戻す\n\n" +
+				"  [F4]\n" +
+				"    操作説明を表示／非表示\n\n" +
+				"  [F5／F6]\n" +
+				"    マーカー色変更\n" +
+				"      " + s1 + "\n\n" +
+				"  [F7／F8]\n" +
+				"    マーカーサイズ変更\n" +
+				"      " + s2 + "\n\n" +
 				"  [F9／F10]\n" +
-				"    透過率を上げる／下げる\n\n" +
+				"    透過率を下げる／上げる\n\n" +
 				"  [F11／F12]\n" +
 				"    前／次の履歴画面へ移動\n";
 			LblHelp.Left = (Width - LblHelp.Width) / 2;
 			LblHelp.Top = (Height - LblHelp.Height) / 2;
-
-			// BtnFormSizeChange1 表示
-			BtnFormSizeChange1.Text = BtnFormSizeChange2.Text = BtnFormSizeChange3.Text = BtnFormSizeChange4.Text = "✕";
 		}
 
 		private void Form1_Shown(object sender, EventArgs e)
@@ -160,16 +245,15 @@ namespace iwm_ScreenPen
 				Drag1X = e.X;
 				Drag1Y = e.Y;
 
-				Pen1 = new Pen(Pen1Color, Pen1Size)
+				Marker1 = new Pen(Marker1Color, Marker1Size)
 				{
 					DashStyle = DashStyle.Solid,
 					StartCap = LineCap.Round,
 					EndCap = LineCap.Round
 				};
 
-				SubPen1ToolTip(Pen1Color, Pen1Size);
-
-				ToolTip1.AutoPopDelay = 2000;
+				SubMarker1ToolTip(Marker1Color, Marker1Size);
+				ToolTip1.AutoPopDelay = 1000;
 				ToolTip1.SetToolTip(PictureBox1, ToolTip1.GetToolTip(PictureBox1));
 				ToolTip1.AutoPopDelay = 0;
 			}
@@ -213,13 +297,13 @@ namespace iwm_ScreenPen
 						break;
 
 					case 2: // 円
-						Graphics1.DrawEllipse(Pen1, Drag2XYWH[0], Drag2XYWH[1], Drag2XYWH[2], Drag2XYWH[3]);
+						Graphics1.DrawEllipse(Marker1, Drag2XYWH[0], Drag2XYWH[1], Drag2XYWH[2], Drag2XYWH[3]);
 						break;
 
 					case 11: // 矢印
 					case 12: // 矢印（両端）
 					case 21: // 直線
-						Graphics1.DrawLine(Pen1, new Point(Drag2X, Drag2Y), new Point(cp.X, cp.Y));
+						Graphics1.DrawLine(Marker1, new Point(Drag2X, Drag2Y), new Point(cp.X, cp.Y));
 						break;
 				}
 
@@ -235,7 +319,7 @@ namespace iwm_ScreenPen
 				// 描画時は情報非表示
 				ToolTip1.Hide(PictureBox1);
 
-				Graphics1.DrawLine(Pen1, new Point(Drag1X, Drag1Y), new Point(e.X, e.Y));
+				Graphics1.DrawLine(Marker1, new Point(Drag1X, Drag1Y), new Point(e.X, e.Y));
 				PictureBox1.Refresh();
 
 				Drag1X = e.X;
@@ -248,7 +332,7 @@ namespace iwm_ScreenPen
 			int iR4 = iR * 4;
 			if (iR4 > iW || iR4 > iH)
 			{
-				Graphics1.DrawRectangle(Pen1, iX, iY, iW, iH);
+				Graphics1.DrawRectangle(Marker1, iX, iY, iW, iH);
 			}
 			else
 			{
@@ -262,7 +346,7 @@ namespace iwm_ScreenPen
 				path.AddBezier(iX + iW, iY + iH - iR, iX + iW, iY + iH - iR + i1, iX + iW - iR + i1, iY + iH, iX + iW - iR, iY + iH);
 				path.AddBezier(iX + iR, iY + iH, iX + iR - i1, iY + iH, iX, iY + iH - iR + i1, iX, iY + iH - iR);
 				path.CloseFigure();
-				Graphics1.DrawPath(Pen1, path);
+				Graphics1.DrawPath(Marker1, path);
 			}
 		}
 
@@ -355,13 +439,13 @@ namespace iwm_ScreenPen
 			ToolTip1.AutoPopDelay = 0;
 		}
 
-		private void SubPen1ToolTip(Color pen1Color, int pen1Size)
+		private void SubMarker1ToolTip(Color pen1Color, int pen1Size)
 		{
-			Pen1Color = pen1Color;
-			Pen1Size = pen1Size;
+			Marker1Color = pen1Color;
+			Marker1Size = pen1Size;
 
 			// 初期設定
-			Pen1 = new Pen(Pen1Color, Pen1Size)
+			Marker1 = new Pen(Marker1Color, Marker1Size)
 			{
 				DashStyle = DashStyle.Solid,
 				StartCap = LineCap.Round,
@@ -369,7 +453,7 @@ namespace iwm_ScreenPen
 			};
 
 			ToolTip1.AutoPopDelay = 2000;
-			ToolTip1.SetToolTip(PictureBox1, $"{Pen1Color.Name} {Pen1Size}px");
+			ToolTip1.SetToolTip(PictureBox1, $"{Marker1Color.Name} {Marker1Size}px");
 			ToolTip1.AutoPopDelay = 0;
 		}
 
@@ -382,21 +466,86 @@ namespace iwm_ScreenPen
 					Cms1_スクリーンショット_Click(sender, null);
 					break;
 
-				// 透過率 +25%
-				case Keys.F9:
-					Opacity -= 0.25F;
-					if (Opacity < 0.25F)
+				// 操作説明
+				case Keys.F4:
+					Cms1_操作説明_Click(sender, e);
+					break;
+
+				// マーカー
+				case Keys.F5:
+				case Keys.F6:
+				case Keys.F7:
+				case Keys.F8:
+					// マーカー色 -1
+					if (e.KeyCode == Keys.F5)
 					{
-						Opacity = 0.25F;
+						for (int _i1 = GblAryMarkerColor.Length - 1; _i1 > 0; _i1--)
+						{
+							if (GblAryMarkerColor[_i1] == Marker1Color)
+							{
+								Marker1Color = GblAryMarkerColor[--_i1];
+								break;
+							}
+						}
 					}
+					// マーカー色 +1
+					else if (e.KeyCode == Keys.F6)
+					{
+
+						for (int _i1 = 0; _i1 < GblAryMarkerColor.Length - 1; _i1++)
+						{
+							if (GblAryMarkerColor[_i1] == Marker1Color)
+							{
+								Marker1Color = GblAryMarkerColor[++_i1];
+								break;
+							}
+						}
+					}
+					// マーカーサイズ -1
+					else if (e.KeyCode == Keys.F7)
+					{
+						for (int _i1 = GblAryMarkerSize.Length - 1; _i1 > 0; _i1--)
+						{
+							if (GblAryMarkerSize[_i1] == Marker1Size)
+							{
+								Marker1Size = GblAryMarkerSize[--_i1];
+								break;
+							}
+						}
+					}
+					// マーカーサイズ +1
+					else if (e.KeyCode == Keys.F8)
+					{
+						for (int _i1 = 0; _i1 < GblAryMarkerSize.Length - 1; _i1++)
+						{
+							if (GblAryMarkerSize[_i1] == Marker1Size)
+							{
+								Marker1Size = GblAryMarkerSize[++_i1];
+								break;
+							}
+						}
+					}
+					SubMarker1ToolTip(Marker1Color, Marker1Size);
+					ToolTip1.AutoPopDelay = 750;
+					ToolTip1.SetToolTip(PictureBox1, ToolTip1.GetToolTip(PictureBox1));
+					ToolTip1.AutoPopDelay = 0;
 					break;
 
 				// 透過率 -25%
-				case Keys.F10:
+				case Keys.F9:
 					Opacity += 0.25F;
 					if (Opacity > 1.0F)
 					{
 						Opacity = 1.0F;
+					}
+					break;
+
+				// 透過率 +25%
+				case Keys.F10:
+					Opacity -= 0.25F;
+					if (Opacity < 0.25F)
+					{
+						Opacity = 0.25F;
 					}
 					break;
 
@@ -434,166 +583,120 @@ namespace iwm_ScreenPen
 
 			string s1 = "";
 
-			Cms1_マーカー色_レッド.Checked = false;
-			Cms1_マーカー色_ブルー.Checked = false;
-			Cms1_マーカー色_マゼンタ.Checked = false;
-			Cms1_マーカー色_ライム.Checked = false;
-			Cms1_マーカー色_イエロー.Checked = false;
-			Cms1_マーカー色_オレンジ.Checked = false;
-			Cms1_マーカー色_シアン.Checked = false;
-
-			if (Pen1Color == Color.Red)
+			foreach (ToolStripMenuItem _v1 in GblListCms1MarkerColor)
 			{
-				Cms1_マーカー色_レッド.Checked = true;
-				s1 = Cms1_マーカー色_レッド.Text;
-			}
-			else if (Pen1Color == Color.Blue)
-			{
-				Cms1_マーカー色_ブルー.Checked = true;
-				s1 = Cms1_マーカー色_ブルー.Text;
-			}
-			else if (Pen1Color == Color.Magenta)
-			{
-				Cms1_マーカー色_マゼンタ.Checked = true;
-				s1 = Cms1_マーカー色_マゼンタ.Text;
-			}
-			else if (Pen1Color == Color.Lime)
-			{
-				Cms1_マーカー色_ライム.Checked = true;
-				s1 = Cms1_マーカー色_ライム.Text;
-			}
-			else if (Pen1Color == Color.Yellow)
-			{
-				Cms1_マーカー色_イエロー.Checked = true;
-				s1 = Cms1_マーカー色_イエロー.Text;
-			}
-			else if (Pen1Color == Color.Orange)
-			{
-				Cms1_マーカー色_オレンジ.Checked = true;
-				s1 = Cms1_マーカー色_オレンジ.Text;
-			}
-			else if (Pen1Color == Color.Cyan)
-			{
-				Cms1_マーカー色_シアン.Checked = true;
-				s1 = Cms1_マーカー色_シアン.Text;
+				_v1.Checked = false;
 			}
 
+			for (int _i1 = 0; _i1 < GblAryMarkerColor.Length; _i1++)
+			{
+				if (GblAryMarkerColor[_i1] == Marker1Color)
+				{
+					GblListCms1MarkerColor[_i1].Checked = true;
+					s1 = GblListCms1MarkerColor[_i1].Text;
+					break;
+				}
+			}
 			Cms1_マーカー色.Text = $"マーカー色（{s1}）";
 
-			Cms1_マーカーサイズ_3px.Checked = false;
-			Cms1_マーカーサイズ_6px.Checked = false;
-			Cms1_マーカーサイズ_9px.Checked = false;
-			Cms1_マーカーサイズ_15px.Checked = false;
-			Cms1_マーカーサイズ_24px.Checked = false;
-
-			switch (Pen1Size)
+			foreach (ToolStripMenuItem _v1 in GblListCms1MarkerSize)
 			{
-				case 3:
-					Cms1_マーカーサイズ_3px.Checked = true;
-					s1 = Cms1_マーカーサイズ_3px.Text;
-					break;
-				case 6:
-					Cms1_マーカーサイズ_6px.Checked = true;
-					s1 = Cms1_マーカーサイズ_6px.Text;
-					break;
-				case 9:
-					Cms1_マーカーサイズ_9px.Checked = true;
-					s1 = Cms1_マーカーサイズ_9px.Text;
-					break;
-				case 15:
-					Cms1_マーカーサイズ_15px.Checked = true;
-					s1 = Cms1_マーカーサイズ_15px.Text;
-					break;
-				case 24:
-					Cms1_マーカーサイズ_24px.Checked = true;
-					s1 = Cms1_マーカーサイズ_24px.Text;
-					break;
+				_v1.Checked = false;
 			}
 
+			for (int _i1 = 0; _i1 < GblAryMarkerSize.Length; _i1++)
+			{
+				if (GblAryMarkerSize[_i1] == Marker1Size)
+				{
+					GblListCms1MarkerSize[_i1].Checked = true;
+					s1 = GblListCms1MarkerSize[_i1].Text;
+					break;
+				}
+			}
 			Cms1_マーカーサイズ.Text = $"マーカーサイズ（{s1}）";
 
-			Cms1_画面透過_0per.Checked = false;
-			Cms1_画面透過_25per.Checked = false;
-			Cms1_画面透過_50per.Checked = false;
-			Cms1_画面透過_75per.Checked = false;
-
-			switch (Opacity)
+			foreach (ToolStripMenuItem _v1 in GblListCms1Opacity)
 			{
-				case 1.0F:
-					Cms1_画面透過_0per.Checked = true;
-					break;
-				case 0.75F:
-					Cms1_画面透過_25per.Checked = true;
-					break;
-				case 0.5F:
-					Cms1_画面透過_50per.Checked = true;
-					break;
-				case 0.25F:
-					Cms1_画面透過_75per.Checked = true;
-					break;
+				_v1.Checked = false;
 			}
 
-			Cms1_画面透過.Text = $"画面透過（{(int)((1.0 - Opacity) * 100)}%）";
+			GblListCms1Opacity[(int)((1.0F - Opacity) * 4.0F)].Checked = true;
+
+			Cms1_画面透過.Text = $"画面透過（{(int)((1.0F - Opacity) * 100F)}%）";
 		}
 
-		private void Cms1_マーカー色_レッド_Click(object sender, EventArgs e)
+		private void Cms1_操作説明_Click(object sender, EventArgs e)
 		{
-			Pen1Color = Color.Red;
+			if (LblHelp.Visible)
+			{
+				LblHelp.Visible = false;
+				PictureBox1.Focus();
+			}
+			else
+			{
+				LblHelp.Visible = true;
+				LblHelp.Focus();
+			}
 		}
 
-		private void Cms1_マーカー色_ブルー_Click(object sender, EventArgs e)
+		private void Cms1_マーカー色0_Click(object sender, EventArgs e)
 		{
-			Pen1Color = Color.Blue;
+			Marker1Color = GblAryMarkerColor[0];
 		}
 
-		private void Cms1_マーカー色_マゼンタ_Click(object sender, EventArgs e)
+		private void Cms1_マーカー色1_Click(object sender, EventArgs e)
 		{
-			Pen1Color = Color.Magenta;
+			Marker1Color = GblAryMarkerColor[1];
 		}
 
-		private void Cms1_マーカー色_ライム_Click(object sender, EventArgs e)
+		private void Cms1_マーカー色2_Click(object sender, EventArgs e)
 		{
-			Pen1Color = Color.Lime;
+			Marker1Color = GblAryMarkerColor[2];
 		}
 
-		private void Cms1_マーカー色_イエロー_Click(object sender, EventArgs e)
+		private void Cms1_マーカー色3_Click(object sender, EventArgs e)
 		{
-			Pen1Color = Color.Yellow;
+			Marker1Color = GblAryMarkerColor[3];
 		}
 
-		private void Cms1_マーカー色_オレンジ_Click(object sender, EventArgs e)
+		private void Cms1_マーカー色4_Click(object sender, EventArgs e)
 		{
-			Pen1Color = Color.Orange;
+			Marker1Color = GblAryMarkerColor[4];
 		}
 
-		private void Cms1_マーカー色_シアン_Click(object sender, EventArgs e)
+		private void Cms1_マーカー色5_Click(object sender, EventArgs e)
 		{
-			Pen1Color = Color.Cyan;
+			Marker1Color = GblAryMarkerColor[5];
 		}
 
-		private void Cms1_マーカーサイズ_3px_Click(object sender, EventArgs e)
+		private void Cms1_マーカー色6_Click(object sender, EventArgs e)
 		{
-			Pen1Size = 3;
+			Marker1Color = GblAryMarkerColor[6];
 		}
 
-		private void Cms1_マーカーサイズ_6px_Click(object sender, EventArgs e)
+		private void Cms1_マーカーサイズ0_Click(object sender, EventArgs e)
 		{
-			Pen1Size = 6;
+			Marker1Size = GblAryMarkerSize[0];
 		}
 
-		private void Cms1_マーカーサイズ_9px_Click(object sender, EventArgs e)
+		private void Cms1_マーカーサイズ1_Click(object sender, EventArgs e)
 		{
-			Pen1Size = 9;
+			Marker1Size = GblAryMarkerSize[1];
 		}
 
-		private void Cms1_マーカーサイズ_15px_Click(object sender, EventArgs e)
+		private void Cms1_マーカーサイズ2_Click(object sender, EventArgs e)
 		{
-			Pen1Size = 15;
+			Marker1Size = GblAryMarkerSize[2];
 		}
 
-		private void Cms1_マーカーサイズ_24px_Click(object sender, EventArgs e)
+		private void Cms1_マーカーサイズ3_Click(object sender, EventArgs e)
 		{
-			Pen1Size = 24;
+			Marker1Size = GblAryMarkerSize[3];
+		}
+
+		private void Cms1_マーカーサイズ4_Click(object sender, EventArgs e)
+		{
+			Marker1Size = GblAryMarkerSize[4];
 		}
 
 		private void Cms1_画面透過_0per_Click(object sender, EventArgs e)
@@ -670,12 +773,7 @@ namespace iwm_ScreenPen
 			}
 		}
 
-		private void Cms1_操作説明_Click(object sender, EventArgs e)
-		{
-			LblHelp.Visible = LblHelp.Visible ? false : true;
-		}
-
-		private void Cms1_閉じる_Click(object sender, EventArgs e)
+		private void Cms1_終了_Click(object sender, EventArgs e)
 		{
 			Application.Exit();
 		}
@@ -692,13 +790,14 @@ namespace iwm_ScreenPen
 
 		private void Cms2_MouseLeave(object sender, EventArgs e)
 		{
+			Drag1On = false;
 			Cms2.Close();
 		}
 
 		private void Cms2_四角_Click(object sender, EventArgs e)
 		{
 			Drag2Type = 1;
-			Pen1 = new Pen(Pen1Color, Pen1Size)
+			Marker1 = new Pen(Marker1Color, Marker1Size)
 			{
 				DashStyle = DashStyle.Solid
 			};
@@ -707,7 +806,7 @@ namespace iwm_ScreenPen
 		private void Cms2_円_Click(object sender, EventArgs e)
 		{
 			Drag2Type = 2;
-			Pen1 = new Pen(Pen1Color, Pen1Size)
+			Marker1 = new Pen(Marker1Color, Marker1Size)
 			{
 				DashStyle = DashStyle.Solid
 			};
@@ -716,7 +815,7 @@ namespace iwm_ScreenPen
 		private void Cms2_矢印_Click(object sender, EventArgs e)
 		{
 			Drag2Type = 11;
-			Pen1 = new Pen(Pen1Color, Pen1Size)
+			Marker1 = new Pen(Marker1Color, Marker1Size)
 			{
 				DashStyle = DashStyle.Solid,
 				StartCap = LineCap.Round,
@@ -728,7 +827,7 @@ namespace iwm_ScreenPen
 		private void Cms2_矢印両端_Click(object sender, EventArgs e)
 		{
 			Drag2Type = 12;
-			Pen1 = new Pen(Pen1Color, Pen1Size)
+			Marker1 = new Pen(Marker1Color, Marker1Size)
 			{
 				DashStyle = DashStyle.Solid,
 				StartCap = LineCap.ArrowAnchor,
@@ -741,7 +840,7 @@ namespace iwm_ScreenPen
 		private void Cms2_直線_Click(object sender, EventArgs e)
 		{
 			Drag2Type = 21;
-			Pen1 = new Pen(Pen1Color, Pen1Size)
+			Marker1 = new Pen(Marker1Color, Marker1Size)
 			{
 				DashStyle = DashStyle.Solid,
 				StartCap = LineCap.Round,
@@ -765,7 +864,7 @@ namespace iwm_ScreenPen
 
 			// Border
 			e.Graphics.DrawLines(
-				new Pen(Pen1Color),
+				new Pen(Marker1Color),
 				new Point[]
 				{
 					new Point (0, 0),
@@ -779,13 +878,23 @@ namespace iwm_ScreenPen
 			// ForeColor
 			using (Font font = new Font(ToolTip1FotType, ToolTip1FontSize))
 			{
-				e.Graphics.DrawString(e.ToolTipText, font, new SolidBrush(Pen1Color), new PointF(10, 1));
+				e.Graphics.DrawString(e.ToolTipText, font, new SolidBrush(Marker1Color), new PointF(10, 1));
 			}
 		}
 
 		private void LblHelp_Click(object sender, EventArgs e)
 		{
-			LblHelp.Visible = false;
+			Cms1_操作説明_Click(sender, e);
+		}
+
+		private void LblHelp_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+		{
+			switch (e.KeyCode)
+			{
+				case Keys.F4:
+					Cms1_操作説明_Click(sender, e);
+					break;
+			}
 		}
 
 		private void BtnFormSizeChange1_Click(object sender, EventArgs e)
@@ -812,53 +921,33 @@ namespace iwm_ScreenPen
 
 		private void SubBtnFormSizeChange(string sId)
 		{
-			string sName = $"BtnFormSizeChange{sId}";
-			Control ctrl = Controls[sName];
-
 			if (GblFormSizeMax)
 			{
-				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = false;
-				BtnFormSizeChange1.Text = BtnFormSizeChange2.Text = BtnFormSizeChange3.Text = BtnFormSizeChange4.Text = "□";
 				GblFormSizeMax = false;
-				Width = ctrl.Width + 1;
-				Height = ctrl.Height + 1;
 
-				switch (sName.Substring(sName.Length - 1))
-				{
-					case "1":
-						Left = GblLeft;
-						Top = GblTop;
-						break;
+				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = false;
 
-					case "2":
-						Left = GblLeft + GblWidth - Width;
-						Top = GblTop;
-						break;
+				Control ctrl = Controls[$"BtnFormSizeChange{sId}"];
 
-					case "3":
-						Left = GblLeft;
-						Top = GblTop + GblHeight - Height;
-						break;
-
-					case "4":
-						Left = GblLeft + GblWidth - Width;
-						Top = GblTop + GblHeight - Height;
-						break;
-				}
-
-				ctrl.BackColor = Color.DarkOrange;
+				// ウィンドウ外のときはプロパティ値を取得できない？ので幅／高は最後に設定
+				Left = ctrl.Location.X + GblLeft;
+				Top = ctrl.Location.Y + GblTop;
+				Width = ctrl.Width + 2;
+				Height = ctrl.Height + 2;
+				ctrl.BackColor = GblPic1MinBtnColor;
 				ctrl.Visible = true;
 			}
 			else
 			{
 				GblFormSizeMax = true;
-				Width = GblWidth;
-				Height = GblHeight;
+
 				Left = GblLeft;
 				Top = GblTop;
-				BtnFormSizeChange1.BackColor = BtnFormSizeChange2.BackColor = BtnFormSizeChange3.BackColor = BtnFormSizeChange4.BackColor = Color.MidnightBlue;
+				Width = GblWidth;
+				Height = GblHeight;
+
+				BtnFormSizeChange1.BackColor = BtnFormSizeChange2.BackColor = BtnFormSizeChange3.BackColor = BtnFormSizeChange4.BackColor = GblPic1MaxBtnColor;
 				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = true;
-				BtnFormSizeChange1.Text = BtnFormSizeChange2.Text = BtnFormSizeChange3.Text = BtnFormSizeChange4.Text = "✕";
 			}
 		}
 
