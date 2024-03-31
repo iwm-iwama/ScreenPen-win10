@@ -82,8 +82,8 @@
 			// PictureBox1
 			// 
 			this.PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.PictureBox1.BackColor = System.Drawing.Color.Black;
 			this.PictureBox1.ContextMenuStrip = this.Cms1;
 			this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -104,18 +104,18 @@
 			// 
 			this.Cms1.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.Cms1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Cms1_操作説明,
-            this.toolStripSeparator0,
-            this.Cms1_マーカー色,
-            this.Cms1_マーカーサイズ,
-            this.Cms1_画面透過,
-            this.toolStripSeparator1,
-            this.Cms1_スクリーンショット,
-            this.Cms1_クリア,
-            this.toolStripSeparator2,
-            this.Cms1_画像を保存,
-            this.toolStripSeparator3,
-            this.Cms1_終了});
+			this.Cms1_操作説明,
+			this.toolStripSeparator0,
+			this.Cms1_マーカー色,
+			this.Cms1_マーカーサイズ,
+			this.Cms1_画面透過,
+			this.toolStripSeparator1,
+			this.Cms1_スクリーンショット,
+			this.Cms1_クリア,
+			this.toolStripSeparator2,
+			this.Cms1_画像を保存,
+			this.toolStripSeparator3,
+			this.Cms1_終了});
 			this.Cms1.Name = "contextMenuStrip1";
 			this.Cms1.Size = new System.Drawing.Size(153, 204);
 			this.Cms1.Opened += new System.EventHandler(this.Cms1_Opened);
@@ -136,13 +136,13 @@
 			// Cms1_マーカー色
 			// 
 			this.Cms1_マーカー色.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Cms1_マーカー色0,
-            this.Cms1_マーカー色1,
-            this.Cms1_マーカー色2,
-            this.Cms1_マーカー色3,
-            this.Cms1_マーカー色4,
-            this.Cms1_マーカー色5,
-            this.Cms1_マーカー色6});
+			this.Cms1_マーカー色0,
+			this.Cms1_マーカー色1,
+			this.Cms1_マーカー色2,
+			this.Cms1_マーカー色3,
+			this.Cms1_マーカー色4,
+			this.Cms1_マーカー色5,
+			this.Cms1_マーカー色6});
 			this.Cms1_マーカー色.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色.Image")));
 			this.Cms1_マーカー色.Name = "Cms1_マーカー色";
 			this.Cms1_マーカー色.Size = new System.Drawing.Size(152, 22);
@@ -200,11 +200,11 @@
 			// Cms1_マーカーサイズ
 			// 
 			this.Cms1_マーカーサイズ.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Cms1_マーカーサイズ0,
-            this.Cms1_マーカーサイズ1,
-            this.Cms1_マーカーサイズ2,
-            this.Cms1_マーカーサイズ3,
-            this.Cms1_マーカーサイズ4});
+			this.Cms1_マーカーサイズ0,
+			this.Cms1_マーカーサイズ1,
+			this.Cms1_マーカーサイズ2,
+			this.Cms1_マーカーサイズ3,
+			this.Cms1_マーカーサイズ4});
 			this.Cms1_マーカーサイズ.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカーサイズ.Image")));
 			this.Cms1_マーカーサイズ.Name = "Cms1_マーカーサイズ";
 			this.Cms1_マーカーサイズ.Size = new System.Drawing.Size(152, 22);
@@ -243,10 +243,10 @@
 			// Cms1_画面透過
 			// 
 			this.Cms1_画面透過.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Cms1_画面透過_0per,
-            this.Cms1_画面透過_25per,
-            this.Cms1_画面透過_50per,
-            this.Cms1_画面透過_75per});
+			this.Cms1_画面透過_0per,
+			this.Cms1_画面透過_25per,
+			this.Cms1_画面透過_50per,
+			this.Cms1_画面透過_75per});
 			this.Cms1_画面透過.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_画面透過.Image")));
 			this.Cms1_画面透過.Name = "Cms1_画面透過";
 			this.Cms1_画面透過.Size = new System.Drawing.Size(152, 22);
@@ -343,13 +343,13 @@
 			// 
 			this.Cms2.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.Cms2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Cms2_四角,
-            this.Cms2_円,
-            this.toolStripMenuItem1,
-            this.Cms2_矢印,
-            this.Cms2_矢印両端,
-            this.toolStripMenuItem2,
-            this.Cms2_直線});
+			this.Cms2_四角,
+			this.Cms2_円,
+			this.toolStripMenuItem1,
+			this.Cms2_矢印,
+			this.Cms2_矢印両端,
+			this.toolStripMenuItem2,
+			this.Cms2_直線});
 			this.Cms2.Name = "Cms2";
 			this.Cms2.Size = new System.Drawing.Size(147, 126);
 			this.Cms2.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.Cms2_Closed);

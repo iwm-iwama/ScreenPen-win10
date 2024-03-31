@@ -10,7 +10,7 @@ namespace iwm_ScreenPen
 	public partial class Form1 : Form
 	{
 		private const string COPYRIGHT = "(C)2022-2024 iwm-iwama";
-		private const string VERSION = "iwm_ScreenPen_20240103";
+		private const string VERSION = "iwm_ScreenPen_20240328";
 
 		// Global
 		private static readonly Color GblPic1MaxBtnColor = Color.DarkBlue;
@@ -63,11 +63,6 @@ namespace iwm_ScreenPen
 		private int Drag2Type = 0;
 		private readonly int[] Drag2XYWH = { 0, 0, 0, 0 };
 
-		private int GblWidth = 0;
-		private int GblHeight = 0;
-		private int GblLeft = 0;
-		private int GblTop = 0;
-
 		public Form1()
 		{
 			InitializeComponent();
@@ -80,10 +75,7 @@ namespace iwm_ScreenPen
 		{
 			// Form1 設定
 			TopMost = true;
-			Width = GblWidth = SystemInformation.WorkingArea.Width;
-			Height = GblHeight = SystemInformation.WorkingArea.Height;
-			Left = GblLeft = SystemInformation.WorkingArea.Left;
-			Top = GblTop = SystemInformation.WorkingArea.Top;
+			SubBtnFormSizeChange();
 
 			// PictureBox1 初期化
 			Bitmap1 = new Bitmap(Width, Height);
@@ -180,7 +172,7 @@ namespace iwm_ScreenPen
 				"    拡大率を変更\n\n" +
 				"  [四隅のボタン]\n" +
 				"    最小化／元に戻す\n\n" +
-				"  [F4]\n" +
+				"  [F1]\n" +
 				"    操作説明を表示／非表示\n\n" +
 				"  [F5／F6]\n" +
 				"    マーカー色変更\n" +
@@ -467,7 +459,7 @@ namespace iwm_ScreenPen
 					break;
 
 				// 操作説明
-				case Keys.F4:
+				case Keys.F1:
 					Cms1_操作説明_Click(sender, e);
 					break;
 
@@ -891,7 +883,7 @@ namespace iwm_ScreenPen
 		{
 			switch (e.KeyCode)
 			{
-				case Keys.F4:
+				case Keys.F1:
 					Cms1_操作説明_Click(sender, e);
 					break;
 			}
@@ -917,37 +909,56 @@ namespace iwm_ScreenPen
 			SubBtnFormSizeChange("4");
 		}
 
-		private bool GblFormSizeMax = true;
+		private int GblLeft = 0;
+		private int GblTop = 0;
 
-		private void SubBtnFormSizeChange(string sId)
+		private void SubBtnFormSizeChange(string id = "")
 		{
-			if (GblFormSizeMax)
-			{
-				GblFormSizeMax = false;
+			Control ctrl = Controls[$"BtnFormSizeChange{id}"];
+			bool bSizeMin = Width < SystemInformation.WorkingArea.Width || Height < SystemInformation.WorkingArea.Height;
 
+			if (ctrl is null || bSizeMin)
+			{
+				Width = Screen.PrimaryScreen.Bounds.Width;
+				Height = Screen.PrimaryScreen.Bounds.Height;
+				Left = GblLeft = Screen.PrimaryScreen.Bounds.Left;
+				Top = GblTop = Screen.PrimaryScreen.Bounds.Top;
+
+				BtnFormSizeChange1.BackColor = BtnFormSizeChange2.BackColor = BtnFormSizeChange3.BackColor = BtnFormSizeChange4.BackColor = GblPic1MaxBtnColor;
+				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = true;
+			}
+			else
+			{
 				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = false;
 
-				Control ctrl = Controls[$"BtnFormSizeChange{sId}"];
+				GblLeft = SystemInformation.WorkingArea.Left;
+				GblTop = SystemInformation.WorkingArea.Top;
 
 				// ウィンドウ外のときはプロパティ値を取得できない？ので幅／高は最後に設定
-				Left = ctrl.Location.X + GblLeft;
-				Top = ctrl.Location.Y + GblTop;
+				switch (id)
+				{
+					case ("1"):
+						Left = GblLeft;
+						Top = GblTop;
+						break;
+					case ("2"):
+						Left = GblLeft + ctrl.Location.X - (Screen.PrimaryScreen.Bounds.Width - SystemInformation.WorkingArea.Width);
+						Top = GblTop;
+						break;
+					case ("3"):
+						Left = GblLeft;
+						Top = GblTop + ctrl.Location.Y - (Screen.PrimaryScreen.Bounds.Height - SystemInformation.WorkingArea.Height);
+						break;
+					case ("4"):
+						Left = GblLeft + ctrl.Location.X - (Screen.PrimaryScreen.Bounds.Width - SystemInformation.WorkingArea.Width);
+						Top = GblTop + ctrl.Location.Y - (Screen.PrimaryScreen.Bounds.Height - SystemInformation.WorkingArea.Height);
+						break;
+				}
+
 				Width = ctrl.Width + 2;
 				Height = ctrl.Height + 2;
 				ctrl.BackColor = GblPic1MinBtnColor;
 				ctrl.Visible = true;
-			}
-			else
-			{
-				GblFormSizeMax = true;
-
-				Left = GblLeft;
-				Top = GblTop;
-				Width = GblWidth;
-				Height = GblHeight;
-
-				BtnFormSizeChange1.BackColor = BtnFormSizeChange2.BackColor = BtnFormSizeChange3.BackColor = BtnFormSizeChange4.BackColor = GblPic1MaxBtnColor;
-				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = true;
 			}
 		}
 
