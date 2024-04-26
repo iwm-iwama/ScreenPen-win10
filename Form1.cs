@@ -10,11 +10,7 @@ namespace iwm_ScreenPen
 	public partial class Form1 : Form
 	{
 		private const string COPYRIGHT = "(C)2022-2024 iwm-iwama";
-		private const string VERSION = "iwm_ScreenPen_20240328";
-
-		// Global
-		private static readonly Color GblPic1MaxBtnColor = Color.DarkBlue;
-		private static readonly Color GblPic1MinBtnColor = Color.Crimson;
+		private const string VERSION = "iwm_ScreenPen_20240424";
 
 		private static readonly Color[] GblAryMarkerColor = {
 			Color.Red,     // [0]
@@ -75,7 +71,10 @@ namespace iwm_ScreenPen
 		{
 			// Form1 設定
 			TopMost = true;
-			SubBtnFormSizeChange();
+			Width = Screen.PrimaryScreen.Bounds.Width;
+			Height = Screen.PrimaryScreen.Bounds.Height;
+			Left = Screen.PrimaryScreen.Bounds.Left;
+			Top = Screen.PrimaryScreen.Bounds.Top;
 
 			// PictureBox1 初期化
 			Bitmap1 = new Bitmap(Width, Height);
@@ -84,15 +83,12 @@ namespace iwm_ScreenPen
 			PictureBox1.BackgroundImage = Bitmap1;
 			PictureBox1.Refresh();
 
-			// ボタン色
-			BtnFormSizeChange1.BackColor = BtnFormSizeChange2.BackColor = BtnFormSizeChange3.BackColor = BtnFormSizeChange4.BackColor = GblPic1MaxBtnColor;
-
 			// 履歴を初期化
 			ListBitmap.Add(new Bitmap(Bitmap1));
 			ListBitmapCurIndex = 0;
 
 			// Marker1 設定
-			SubMarker1ToolTip(Marker1Color, Marker1Size);
+			SubMarkerSet(Marker1Color, Marker1Size);
 
 			// マウスカーソル 設定
 			System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
@@ -100,7 +96,7 @@ namespace iwm_ScreenPen
 			PictureBox1.Cursor = CursorPen;
 
 			// ToolTip1 設定
-			ToolTip1.AutoPopDelay = ToolTip1.AutomaticDelay = 2000;
+			ToolTip1.AutoPopDelay = ToolTip1.AutomaticDelay = 1000;
 			ToolTip1.OwnerDraw = true;
 			ToolTip1.Popup += new PopupEventHandler(ToolTip1_Popup);
 			ToolTip1.Draw += new DrawToolTipEventHandler(ToolTip1_Draw);
@@ -140,50 +136,28 @@ namespace iwm_ScreenPen
 			// 操作説明
 			LblHelp.Visible = false;
 
-			int i1 = 0;
-			string s1 = "";
-			for (; i1 < GblAryMarkerColor.Length - 1; i1++)
-			{
-				s1 += GblAryMarkerColor[i1].Name + ", ";
-			}
-			s1 += GblAryMarkerColor[i1].Name;
-
-			int i2 = 0;
-			string s2 = "";
-			for (; i2 < GblAryMarkerSize.Length - 1; i2++)
-			{
-				s2 += GblAryMarkerSize[i2] + "px, ";
-			}
-			s2 += GblAryMarkerSize[i2] + "px";
-
 			LblHelp.Text =
-				$"{VERSION}  {COPYRIGHT}\n\n" +
-				"【操作説明】\n\n" +
-				"  [右クリック]\n" +
-				"    コンテキストメニュー\n\n" +
-				"  [Space]\n" +
-				"    スクリーンショット\n\n" +
-				"  [左クリック]＋[ドラッグ]\n" +
-				"    フリーハンド描画\n\n" +
-				"  [左ダブルクリック]\n" +
-				"    四角／円／矢印／線を描画\n" +
-				"    描画種を選択、マウスカーソルで範囲指定、左クリックで決定\n\n" +
-				"  [マウスホイール]\n" +
-				"    拡大率を変更\n\n" +
-				"  [四隅のボタン]\n" +
-				"    最小化／元に戻す\n\n" +
-				"  [F1]\n" +
-				"    操作説明を表示／非表示\n\n" +
-				"  [F5／F6]\n" +
-				"    マーカー色変更\n" +
-				"      " + s1 + "\n\n" +
-				"  [F7／F8]\n" +
-				"    マーカーサイズ変更\n" +
-				"      " + s2 + "\n\n" +
-				"  [F9／F10]\n" +
-				"    透過率を下げる／上げる\n\n" +
-				"  [F11／F12]\n" +
-				"    前／次の履歴画面へ移動\n";
+				COPYRIGHT + "\n" +
+				"    " + VERSION + "\n" +
+				"\n" +
+				"・マウス操作\n" +
+				"    [左クリック]＋[ドラッグ]\n" +
+				"        フリーハンド描画\n" +
+				"    [左ダブルクリック]\n" +
+				"        四角／円／矢印／線を描画\n" +
+				"        描画種を選択、マウスカーソルで範囲指定、左クリックで決定\n" +
+				"    [マウスホイール]\n" +
+				"        拡大率を変更\n" +
+				"\n" +
+				"・キー操作\n" +
+				"    [F1]\n" +
+				"        操作説明を表示／非表示\n" +
+				"    [Up／Down]\n" +
+				"        透過率を下げる／上げる\n" +
+				"    [Left／Right]\n" +
+				"        前／次の履歴画面へ移動\n" +
+				"    [Space]\n" +
+				"        スクリーンショット\n";
 			LblHelp.Left = (Width - LblHelp.Width) / 2;
 			LblHelp.Top = (Height - LblHelp.Height) / 2;
 		}
@@ -244,10 +218,7 @@ namespace iwm_ScreenPen
 					EndCap = LineCap.Round
 				};
 
-				SubMarker1ToolTip(Marker1Color, Marker1Size);
-				ToolTip1.AutoPopDelay = 1000;
-				ToolTip1.SetToolTip(PictureBox1, ToolTip1.GetToolTip(PictureBox1));
-				ToolTip1.AutoPopDelay = 0;
+				SubPictureBox1Tooltip($"{Marker1Color.Name} {Marker1Size}px");
 			}
 		}
 
@@ -426,123 +397,40 @@ namespace iwm_ScreenPen
 				PictureBox1.Refresh();
 			}
 
-			ToolTip1.AutoPopDelay = 2000;
-			ToolTip1.SetToolTip(PictureBox1, $"拡大率 {AryImageResize[AryImageResizeIndex] * 100}%");
-			ToolTip1.AutoPopDelay = 0;
-		}
-
-		private void SubMarker1ToolTip(Color pen1Color, int pen1Size)
-		{
-			Marker1Color = pen1Color;
-			Marker1Size = pen1Size;
-
-			// 初期設定
-			Marker1 = new Pen(Marker1Color, Marker1Size)
-			{
-				DashStyle = DashStyle.Solid,
-				StartCap = LineCap.Round,
-				EndCap = LineCap.Round
-			};
-
-			ToolTip1.AutoPopDelay = 2000;
-			ToolTip1.SetToolTip(PictureBox1, $"{Marker1Color.Name} {Marker1Size}px");
-			ToolTip1.AutoPopDelay = 0;
+			SubPictureBox1Tooltip($"拡大率 {AryImageResize[AryImageResizeIndex] * 100}%");
 		}
 
 		private void PictureBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
 		{
 			switch (e.KeyCode)
 			{
-				// スクリーンショット
-				case Keys.Space:
-					Cms1_スクリーンショット_Click(sender, null);
-					break;
-
 				// 操作説明
 				case Keys.F1:
 					Cms1_操作説明_Click(sender, e);
 					break;
 
-				// マーカー
-				case Keys.F5:
-				case Keys.F6:
-				case Keys.F7:
-				case Keys.F8:
-					// マーカー色 -1
-					if (e.KeyCode == Keys.F5)
-					{
-						for (int _i1 = GblAryMarkerColor.Length - 1; _i1 > 0; _i1--)
-						{
-							if (GblAryMarkerColor[_i1] == Marker1Color)
-							{
-								Marker1Color = GblAryMarkerColor[--_i1];
-								break;
-							}
-						}
-					}
-					// マーカー色 +1
-					else if (e.KeyCode == Keys.F6)
-					{
-
-						for (int _i1 = 0; _i1 < GblAryMarkerColor.Length - 1; _i1++)
-						{
-							if (GblAryMarkerColor[_i1] == Marker1Color)
-							{
-								Marker1Color = GblAryMarkerColor[++_i1];
-								break;
-							}
-						}
-					}
-					// マーカーサイズ -1
-					else if (e.KeyCode == Keys.F7)
-					{
-						for (int _i1 = GblAryMarkerSize.Length - 1; _i1 > 0; _i1--)
-						{
-							if (GblAryMarkerSize[_i1] == Marker1Size)
-							{
-								Marker1Size = GblAryMarkerSize[--_i1];
-								break;
-							}
-						}
-					}
-					// マーカーサイズ +1
-					else if (e.KeyCode == Keys.F8)
-					{
-						for (int _i1 = 0; _i1 < GblAryMarkerSize.Length - 1; _i1++)
-						{
-							if (GblAryMarkerSize[_i1] == Marker1Size)
-							{
-								Marker1Size = GblAryMarkerSize[++_i1];
-								break;
-							}
-						}
-					}
-					SubMarker1ToolTip(Marker1Color, Marker1Size);
-					ToolTip1.AutoPopDelay = 750;
-					ToolTip1.SetToolTip(PictureBox1, ToolTip1.GetToolTip(PictureBox1));
-					ToolTip1.AutoPopDelay = 0;
-					break;
-
 				// 透過率 -25%
-				case Keys.F9:
+				case Keys.Up:
 					Opacity += 0.25F;
 					if (Opacity > 1.0F)
 					{
 						Opacity = 1.0F;
 					}
+					SubPictureBox1Tooltip($"透過率 {(1.0F - Opacity) * 100}%");
 					break;
 
 				// 透過率 +25%
-				case Keys.F10:
+				case Keys.Down:
 					Opacity -= 0.25F;
 					if (Opacity < 0.25F)
 					{
 						Opacity = 0.25F;
 					}
+					SubPictureBox1Tooltip($"透過率 {(1.0F - Opacity) * 100}%");
 					break;
 
 				// Undo
-				case Keys.F11:
+				case Keys.Left:
 					--ListBitmapCurIndex;
 					if (ListBitmapCurIndex < 0)
 					{
@@ -552,13 +440,18 @@ namespace iwm_ScreenPen
 					break;
 
 				// Redo
-				case Keys.F12:
+				case Keys.Right:
 					++ListBitmapCurIndex;
 					if (ListBitmapCurIndex >= ListBitmap.Count)
 					{
 						ListBitmapCurIndex = ListBitmap.Count - 1;
 						return;
 					}
+					break;
+
+				// スクリーンショット
+				case Keys.Space:
+					Cms1_スクリーンショット_Click(sender, null);
 					break;
 			}
 
@@ -615,6 +508,11 @@ namespace iwm_ScreenPen
 			GblListCms1Opacity[(int)((1.0F - Opacity) * 4.0F)].Checked = true;
 
 			Cms1_画面透過.Text = $"画面透過（{(int)((1.0F - Opacity) * 100F)}%）";
+		}
+
+		private void Cms1_最小化_Click(object sender, EventArgs e)
+		{
+			WindowState = FormWindowState.Minimized;
 		}
 
 		private void Cms1_操作説明_Click(object sender, EventArgs e)
@@ -889,77 +787,27 @@ namespace iwm_ScreenPen
 			}
 		}
 
-		private void BtnFormSizeChange1_Click(object sender, EventArgs e)
+		private void SubMarkerSet(Color pen1Color, int pen1Size)
 		{
-			SubBtnFormSizeChange("1");
-		}
+			Marker1Color = pen1Color;
+			Marker1Size = pen1Size;
 
-		private void BtnFormSizeChange2_Click(object sender, EventArgs e)
-		{
-			SubBtnFormSizeChange("2");
-		}
-
-		private void BtnFormSizeChange3_Click(object sender, EventArgs e)
-		{
-			SubBtnFormSizeChange("3");
-		}
-
-		private void BtnFormSizeChange4_Click(object sender, EventArgs e)
-		{
-			SubBtnFormSizeChange("4");
-		}
-
-		private int GblLeft = 0;
-		private int GblTop = 0;
-
-		private void SubBtnFormSizeChange(string id = "")
-		{
-			Control ctrl = Controls[$"BtnFormSizeChange{id}"];
-			bool bSizeMin = Width < SystemInformation.WorkingArea.Width || Height < SystemInformation.WorkingArea.Height;
-
-			if (ctrl is null || bSizeMin)
+			// 初期設定
+			Marker1 = new Pen(Marker1Color, Marker1Size)
 			{
-				Width = Screen.PrimaryScreen.Bounds.Width;
-				Height = Screen.PrimaryScreen.Bounds.Height;
-				Left = GblLeft = Screen.PrimaryScreen.Bounds.Left;
-				Top = GblTop = Screen.PrimaryScreen.Bounds.Top;
+				DashStyle = DashStyle.Solid,
+				StartCap = LineCap.Round,
+				EndCap = LineCap.Round
+			};
+		}
 
-				BtnFormSizeChange1.BackColor = BtnFormSizeChange2.BackColor = BtnFormSizeChange3.BackColor = BtnFormSizeChange4.BackColor = GblPic1MaxBtnColor;
-				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = true;
-			}
-			else
-			{
-				BtnFormSizeChange1.Visible = BtnFormSizeChange2.Visible = BtnFormSizeChange3.Visible = BtnFormSizeChange4.Visible = false;
+		private void SubPictureBox1Tooltip(string str)
+		{
+			SubMarkerSet(Marker1Color, Marker1Size);
 
-				GblLeft = SystemInformation.WorkingArea.Left;
-				GblTop = SystemInformation.WorkingArea.Top;
-
-				// ウィンドウ外のときはプロパティ値を取得できない？ので幅／高は最後に設定
-				switch (id)
-				{
-					case ("1"):
-						Left = GblLeft;
-						Top = GblTop;
-						break;
-					case ("2"):
-						Left = GblLeft + ctrl.Location.X - (Screen.PrimaryScreen.Bounds.Width - SystemInformation.WorkingArea.Width);
-						Top = GblTop;
-						break;
-					case ("3"):
-						Left = GblLeft;
-						Top = GblTop + ctrl.Location.Y - (Screen.PrimaryScreen.Bounds.Height - SystemInformation.WorkingArea.Height);
-						break;
-					case ("4"):
-						Left = GblLeft + ctrl.Location.X - (Screen.PrimaryScreen.Bounds.Width - SystemInformation.WorkingArea.Width);
-						Top = GblTop + ctrl.Location.Y - (Screen.PrimaryScreen.Bounds.Height - SystemInformation.WorkingArea.Height);
-						break;
-				}
-
-				Width = ctrl.Width + 2;
-				Height = ctrl.Height + 2;
-				ctrl.BackColor = GblPic1MinBtnColor;
-				ctrl.Visible = true;
-			}
+			ToolTip1.AutoPopDelay = 1000;
+			ToolTip1.SetToolTip(PictureBox1, str);
+			ToolTip1.AutoPopDelay = 0;
 		}
 
 		private static class Program

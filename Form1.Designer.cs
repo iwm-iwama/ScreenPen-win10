@@ -32,7 +32,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.PictureBox1 = new System.Windows.Forms.PictureBox();
 			this.Cms1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.Cms1_操作説明 = new System.Windows.Forms.ToolStripMenuItem();
+			this.Cms1_最小化 = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator0 = new System.Windows.Forms.ToolStripSeparator();
 			this.Cms1_マーカー色 = new System.Windows.Forms.ToolStripMenuItem();
 			this.Cms1_マーカー色0 = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,8 +56,9 @@
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.Cms1_スクリーンショット = new System.Windows.Forms.ToolStripMenuItem();
 			this.Cms1_クリア = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.Cms1_画像を保存 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.Cms1_操作説明 = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.Cms1_終了 = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -70,10 +71,6 @@
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			this.Cms2_直線 = new System.Windows.Forms.ToolStripMenuItem();
 			this.LblHelp = new System.Windows.Forms.Label();
-			this.BtnFormSizeChange2 = new System.Windows.Forms.Button();
-			this.BtnFormSizeChange1 = new System.Windows.Forms.Button();
-			this.BtnFormSizeChange3 = new System.Windows.Forms.Button();
-			this.BtnFormSizeChange4 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
 			this.Cms1.SuspendLayout();
 			this.Cms2.SuspendLayout();
@@ -81,8 +78,8 @@
 			// 
 			// PictureBox1
 			// 
-			this.PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-			| System.Windows.Forms.AnchorStyles.Left) 
+			this.PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.PictureBox1.BackColor = System.Drawing.Color.Black;
 			this.PictureBox1.ContextMenuStrip = this.Cms1;
@@ -104,7 +101,7 @@
 			// 
 			this.Cms1.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.Cms1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.Cms1_操作説明,
+			this.Cms1_最小化,
 			this.toolStripSeparator0,
 			this.Cms1_マーカー色,
 			this.Cms1_マーカーサイズ,
@@ -112,26 +109,27 @@
 			this.toolStripSeparator1,
 			this.Cms1_スクリーンショット,
 			this.Cms1_クリア,
-			this.toolStripSeparator2,
 			this.Cms1_画像を保存,
+			this.toolStripSeparator2,
+			this.Cms1_操作説明,
 			this.toolStripSeparator3,
 			this.Cms1_終了});
 			this.Cms1.Name = "contextMenuStrip1";
-			this.Cms1.Size = new System.Drawing.Size(153, 204);
+			this.Cms1.Size = new System.Drawing.Size(181, 248);
 			this.Cms1.Opened += new System.EventHandler(this.Cms1_Opened);
 			// 
-			// Cms1_操作説明
+			// Cms1_最小化
 			// 
-			this.Cms1_操作説明.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_操作説明.Image")));
-			this.Cms1_操作説明.Name = "Cms1_操作説明";
-			this.Cms1_操作説明.Size = new System.Drawing.Size(152, 22);
-			this.Cms1_操作説明.Text = "操作説明";
-			this.Cms1_操作説明.Click += new System.EventHandler(this.Cms1_操作説明_Click);
+			this.Cms1_最小化.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_最小化.Image")));
+			this.Cms1_最小化.Name = "Cms1_最小化";
+			this.Cms1_最小化.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_最小化.Text = "最小化";
+			this.Cms1_最小化.Click += new System.EventHandler(this.Cms1_最小化_Click);
 			// 
 			// toolStripSeparator0
 			// 
 			this.toolStripSeparator0.Name = "toolStripSeparator0";
-			this.toolStripSeparator0.Size = new System.Drawing.Size(149, 6);
+			this.toolStripSeparator0.Size = new System.Drawing.Size(177, 6);
 			// 
 			// Cms1_マーカー色
 			// 
@@ -145,7 +143,7 @@
 			this.Cms1_マーカー色6});
 			this.Cms1_マーカー色.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色.Image")));
 			this.Cms1_マーカー色.Name = "Cms1_マーカー色";
-			this.Cms1_マーカー色.Size = new System.Drawing.Size(152, 22);
+			this.Cms1_マーカー色.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_マーカー色.Text = "マーカー色";
 			// 
 			// Cms1_マーカー色0
@@ -207,7 +205,7 @@
 			this.Cms1_マーカーサイズ4});
 			this.Cms1_マーカーサイズ.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカーサイズ.Image")));
 			this.Cms1_マーカーサイズ.Name = "Cms1_マーカーサイズ";
-			this.Cms1_マーカーサイズ.Size = new System.Drawing.Size(152, 22);
+			this.Cms1_マーカーサイズ.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_マーカーサイズ.Text = "マーカーサイズ";
 			// 
 			// Cms1_マーカーサイズ0
@@ -249,7 +247,7 @@
 			this.Cms1_画面透過_75per});
 			this.Cms1_画面透過.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_画面透過.Image")));
 			this.Cms1_画面透過.Name = "Cms1_画面透過";
-			this.Cms1_画面透過.Size = new System.Drawing.Size(152, 22);
+			this.Cms1_画面透過.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_画面透過.Text = "画面透過";
 			// 
 			// Cms1_画面透過_0per
@@ -283,7 +281,7 @@
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
 			// 
 			// Cms1_スクリーンショット
 			// 
@@ -292,7 +290,7 @@
 			this.Cms1_スクリーンショット.ForeColor = System.Drawing.Color.White;
 			this.Cms1_スクリーンショット.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_スクリーンショット.Image")));
 			this.Cms1_スクリーンショット.Name = "Cms1_スクリーンショット";
-			this.Cms1_スクリーンショット.Size = new System.Drawing.Size(152, 22);
+			this.Cms1_スクリーンショット.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_スクリーンショット.Text = "スクリーンショット";
 			this.Cms1_スクリーンショット.Click += new System.EventHandler(this.Cms1_スクリーンショット_Click);
 			// 
@@ -300,27 +298,35 @@
 			// 
 			this.Cms1_クリア.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_クリア.Image")));
 			this.Cms1_クリア.Name = "Cms1_クリア";
-			this.Cms1_クリア.Size = new System.Drawing.Size(152, 22);
+			this.Cms1_クリア.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_クリア.Text = "クリア";
 			this.Cms1_クリア.Click += new System.EventHandler(this.Cms1_クリア_Click);
-			// 
-			// toolStripSeparator2
-			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
 			// 
 			// Cms1_画像を保存
 			// 
 			this.Cms1_画像を保存.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_画像を保存.Image")));
 			this.Cms1_画像を保存.Name = "Cms1_画像を保存";
-			this.Cms1_画像を保存.Size = new System.Drawing.Size(152, 22);
+			this.Cms1_画像を保存.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_画像を保存.Text = "画像を保存";
 			this.Cms1_画像を保存.Click += new System.EventHandler(this.Cms1_画像を保存_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+			// 
+			// Cms1_操作説明
+			// 
+			this.Cms1_操作説明.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_操作説明.Image")));
+			this.Cms1_操作説明.Name = "Cms1_操作説明";
+			this.Cms1_操作説明.Size = new System.Drawing.Size(180, 22);
+			this.Cms1_操作説明.Text = "操作説明";
+			this.Cms1_操作説明.Click += new System.EventHandler(this.Cms1_操作説明_Click);
 			// 
 			// toolStripSeparator3
 			// 
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+			this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
 			// 
 			// Cms1_終了
 			// 
@@ -328,7 +334,7 @@
 			this.Cms1_終了.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_終了.Image")));
 			this.Cms1_終了.ImageTransparentColor = System.Drawing.Color.Transparent;
 			this.Cms1_終了.Name = "Cms1_終了";
-			this.Cms1_終了.Size = new System.Drawing.Size(152, 22);
+			this.Cms1_終了.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_終了.Text = "終了";
 			this.Cms1_終了.Click += new System.EventHandler(this.Cms1_終了_Click);
 			// 
@@ -425,93 +431,6 @@
 			this.LblHelp.Click += new System.EventHandler(this.LblHelp_Click);
 			this.LblHelp.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.LblHelp_PreviewKeyDown);
 			// 
-			// BtnFormSizeChange2
-			// 
-			this.BtnFormSizeChange2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BtnFormSizeChange2.BackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.BtnFormSizeChange2.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BtnFormSizeChange2.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange2.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-			this.BtnFormSizeChange2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.BtnFormSizeChange2.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.BtnFormSizeChange2.ForeColor = System.Drawing.Color.White;
-			this.BtnFormSizeChange2.Location = new System.Drawing.Point(274, 0);
-			this.BtnFormSizeChange2.Margin = new System.Windows.Forms.Padding(0);
-			this.BtnFormSizeChange2.Name = "BtnFormSizeChange2";
-			this.BtnFormSizeChange2.Size = new System.Drawing.Size(24, 24);
-			this.BtnFormSizeChange2.TabIndex = 0;
-			this.BtnFormSizeChange2.TabStop = false;
-			this.BtnFormSizeChange2.UseVisualStyleBackColor = false;
-			this.BtnFormSizeChange2.Click += new System.EventHandler(this.BtnFormSizeChange2_Click);
-			// 
-			// BtnFormSizeChange1
-			// 
-			this.BtnFormSizeChange1.BackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.BtnFormSizeChange1.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BtnFormSizeChange1.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange1.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-			this.BtnFormSizeChange1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.BtnFormSizeChange1.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.BtnFormSizeChange1.ForeColor = System.Drawing.Color.White;
-			this.BtnFormSizeChange1.Location = new System.Drawing.Point(0, 0);
-			this.BtnFormSizeChange1.Margin = new System.Windows.Forms.Padding(0);
-			this.BtnFormSizeChange1.Name = "BtnFormSizeChange1";
-			this.BtnFormSizeChange1.Size = new System.Drawing.Size(24, 24);
-			this.BtnFormSizeChange1.TabIndex = 0;
-			this.BtnFormSizeChange1.TabStop = false;
-			this.BtnFormSizeChange1.UseVisualStyleBackColor = false;
-			this.BtnFormSizeChange1.Click += new System.EventHandler(this.BtnFormSizeChange1_Click);
-			// 
-			// BtnFormSizeChange3
-			// 
-			this.BtnFormSizeChange3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.BtnFormSizeChange3.BackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.BtnFormSizeChange3.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BtnFormSizeChange3.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange3.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-			this.BtnFormSizeChange3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.BtnFormSizeChange3.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.BtnFormSizeChange3.ForeColor = System.Drawing.Color.White;
-			this.BtnFormSizeChange3.Location = new System.Drawing.Point(0, 274);
-			this.BtnFormSizeChange3.Margin = new System.Windows.Forms.Padding(0);
-			this.BtnFormSizeChange3.Name = "BtnFormSizeChange3";
-			this.BtnFormSizeChange3.Size = new System.Drawing.Size(24, 24);
-			this.BtnFormSizeChange3.TabIndex = 0;
-			this.BtnFormSizeChange3.TabStop = false;
-			this.BtnFormSizeChange3.UseVisualStyleBackColor = false;
-			this.BtnFormSizeChange3.Click += new System.EventHandler(this.BtnFormSizeChange3_Click);
-			// 
-			// BtnFormSizeChange4
-			// 
-			this.BtnFormSizeChange4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.BtnFormSizeChange4.BackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.BtnFormSizeChange4.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BtnFormSizeChange4.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange4.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
-			this.BtnFormSizeChange4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
-			this.BtnFormSizeChange4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.BtnFormSizeChange4.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.BtnFormSizeChange4.ForeColor = System.Drawing.Color.White;
-			this.BtnFormSizeChange4.Location = new System.Drawing.Point(274, 274);
-			this.BtnFormSizeChange4.Margin = new System.Windows.Forms.Padding(0);
-			this.BtnFormSizeChange4.Name = "BtnFormSizeChange4";
-			this.BtnFormSizeChange4.Size = new System.Drawing.Size(24, 24);
-			this.BtnFormSizeChange4.TabIndex = 0;
-			this.BtnFormSizeChange4.TabStop = false;
-			this.BtnFormSizeChange4.UseVisualStyleBackColor = false;
-			this.BtnFormSizeChange4.Click += new System.EventHandler(this.BtnFormSizeChange4_Click);
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -519,10 +438,6 @@
 			this.BackColor = System.Drawing.Color.Black;
 			this.ClientSize = new System.Drawing.Size(298, 298);
 			this.ControlBox = false;
-			this.Controls.Add(this.BtnFormSizeChange4);
-			this.Controls.Add(this.BtnFormSizeChange3);
-			this.Controls.Add(this.BtnFormSizeChange1);
-			this.Controls.Add(this.BtnFormSizeChange2);
 			this.Controls.Add(this.LblHelp);
 			this.Controls.Add(this.PictureBox1);
 			this.DoubleBuffered = true;
@@ -549,7 +464,7 @@
 		private System.Windows.Forms.PictureBox PictureBox1;
 		private System.Windows.Forms.ToolTip ToolTip1;
 		private System.Windows.Forms.ContextMenuStrip Cms1;
-		private System.Windows.Forms.ToolStripMenuItem Cms1_操作説明;
+		private System.Windows.Forms.ToolStripMenuItem Cms1_最小化;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator0;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_マーカー色;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_マーカー色0;
@@ -573,8 +488,9 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_スクリーンショット;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_クリア;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_画像を保存;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripMenuItem Cms1_操作説明;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem Cms1_終了;
 		private System.Windows.Forms.ContextMenuStrip Cms2;
@@ -586,9 +502,5 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripMenuItem Cms2_直線;
 		private System.Windows.Forms.Label LblHelp;
-		private System.Windows.Forms.Button BtnFormSizeChange2;
-		private System.Windows.Forms.Button BtnFormSizeChange1;
-		private System.Windows.Forms.Button BtnFormSizeChange3;
-		private System.Windows.Forms.Button BtnFormSizeChange4;
 	}
 }
