@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace iwm_ScreenPen
 {
-	public partial class Form1 : Form
+	public partial class Form1: Form
 	{
-		private const string COPYRIGHT = "(C)2022-2024 iwm-iwama";
-		private const string VERSION = "iwm_ScreenPen_20240424";
+		private const string COPYRIGHT = "(C)2022-2025 iwm-iwama";
+		private const string VERSION = "iwm_ScreenPen_20250611";
 
 		private static readonly Color[] GblAryMarkerColor = {
 			Color.Red,     // [0]
@@ -779,12 +779,7 @@ namespace iwm_ScreenPen
 
 		private void LblHelp_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
 		{
-			switch (e.KeyCode)
-			{
-				case Keys.F1:
-					Cms1_操作説明_Click(sender, e);
-					break;
-			}
+			PictureBox1_PreviewKeyDown(sender, e);
 		}
 
 		private void SubMarkerSet(Color pen1Color, int pen1Size)
