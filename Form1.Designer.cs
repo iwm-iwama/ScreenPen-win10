@@ -78,8 +78,8 @@
 			// 
 			// PictureBox1
 			// 
-			this.PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			| System.Windows.Forms.AnchorStyles.Left)
+			this.PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			| System.Windows.Forms.AnchorStyles.Left) 
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.PictureBox1.BackColor = System.Drawing.Color.Black;
 			this.PictureBox1.ContextMenuStrip = this.Cms1;
@@ -92,7 +92,8 @@
 			this.PictureBox1.TabStop = false;
 			this.PictureBox1.DoubleClick += new System.EventHandler(this.PictureBox1_DoubleClick);
 			this.PictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
-			this.PictureBox1.MouseEnter += new System.EventHandler(this.PictureBox1_MouseEnter);
+			this.PictureBox1.MouseLeave += new System.EventHandler(this.PictureBox1_MouseLeave);
+			this.PictureBox1.MouseHover += new System.EventHandler(this.PictureBox1_MouseHover);
 			this.PictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
 			this.PictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseUp);
 			this.PictureBox1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.PictureBox1_PreviewKeyDown);
@@ -150,49 +151,49 @@
 			// 
 			this.Cms1_マーカー色0.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色0.Image")));
 			this.Cms1_マーカー色0.Name = "Cms1_マーカー色0";
-			this.Cms1_マーカー色0.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカー色0.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカー色0.Click += new System.EventHandler(this.Cms1_マーカー色0_Click);
 			// 
 			// Cms1_マーカー色1
 			// 
 			this.Cms1_マーカー色1.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色1.Image")));
 			this.Cms1_マーカー色1.Name = "Cms1_マーカー色1";
-			this.Cms1_マーカー色1.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカー色1.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカー色1.Click += new System.EventHandler(this.Cms1_マーカー色1_Click);
 			// 
 			// Cms1_マーカー色2
 			// 
 			this.Cms1_マーカー色2.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色2.Image")));
 			this.Cms1_マーカー色2.Name = "Cms1_マーカー色2";
-			this.Cms1_マーカー色2.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカー色2.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカー色2.Click += new System.EventHandler(this.Cms1_マーカー色2_Click);
 			// 
 			// Cms1_マーカー色3
 			// 
 			this.Cms1_マーカー色3.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色3.Image")));
 			this.Cms1_マーカー色3.Name = "Cms1_マーカー色3";
-			this.Cms1_マーカー色3.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカー色3.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカー色3.Click += new System.EventHandler(this.Cms1_マーカー色3_Click);
 			// 
 			// Cms1_マーカー色4
 			// 
 			this.Cms1_マーカー色4.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色4.Image")));
 			this.Cms1_マーカー色4.Name = "Cms1_マーカー色4";
-			this.Cms1_マーカー色4.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカー色4.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカー色4.Click += new System.EventHandler(this.Cms1_マーカー色4_Click);
 			// 
 			// Cms1_マーカー色5
 			// 
 			this.Cms1_マーカー色5.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色5.Image")));
 			this.Cms1_マーカー色5.Name = "Cms1_マーカー色5";
-			this.Cms1_マーカー色5.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカー色5.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカー色5.Click += new System.EventHandler(this.Cms1_マーカー色5_Click);
 			// 
 			// Cms1_マーカー色6
 			// 
 			this.Cms1_マーカー色6.Image = ((System.Drawing.Image)(resources.GetObject("Cms1_マーカー色6.Image")));
 			this.Cms1_マーカー色6.Name = "Cms1_マーカー色6";
-			this.Cms1_マーカー色6.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカー色6.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカー色6.Click += new System.EventHandler(this.Cms1_マーカー色6_Click);
 			// 
 			// Cms1_マーカーサイズ
@@ -211,31 +212,31 @@
 			// Cms1_マーカーサイズ0
 			// 
 			this.Cms1_マーカーサイズ0.Name = "Cms1_マーカーサイズ0";
-			this.Cms1_マーカーサイズ0.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカーサイズ0.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカーサイズ0.Click += new System.EventHandler(this.Cms1_マーカーサイズ0_Click);
 			// 
 			// Cms1_マーカーサイズ1
 			// 
 			this.Cms1_マーカーサイズ1.Name = "Cms1_マーカーサイズ1";
-			this.Cms1_マーカーサイズ1.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカーサイズ1.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカーサイズ1.Click += new System.EventHandler(this.Cms1_マーカーサイズ1_Click);
 			// 
 			// Cms1_マーカーサイズ2
 			// 
 			this.Cms1_マーカーサイズ2.Name = "Cms1_マーカーサイズ2";
-			this.Cms1_マーカーサイズ2.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカーサイズ2.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカーサイズ2.Click += new System.EventHandler(this.Cms1_マーカーサイズ2_Click);
 			// 
 			// Cms1_マーカーサイズ3
 			// 
 			this.Cms1_マーカーサイズ3.Name = "Cms1_マーカーサイズ3";
-			this.Cms1_マーカーサイズ3.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカーサイズ3.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカーサイズ3.Click += new System.EventHandler(this.Cms1_マーカーサイズ3_Click);
 			// 
 			// Cms1_マーカーサイズ4
 			// 
 			this.Cms1_マーカーサイズ4.Name = "Cms1_マーカーサイズ4";
-			this.Cms1_マーカーサイズ4.Size = new System.Drawing.Size(67, 22);
+			this.Cms1_マーカーサイズ4.Size = new System.Drawing.Size(68, 22);
 			this.Cms1_マーカーサイズ4.Click += new System.EventHandler(this.Cms1_マーカーサイズ4_Click);
 			// 
 			// Cms1_画面透過
@@ -253,28 +254,28 @@
 			// Cms1_画面透過_0per
 			// 
 			this.Cms1_画面透過_0per.Name = "Cms1_画面透過_0per";
-			this.Cms1_画面透過_0per.Size = new System.Drawing.Size(96, 22);
+			this.Cms1_画面透過_0per.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_画面透過_0per.Text = "0%";
 			this.Cms1_画面透過_0per.Click += new System.EventHandler(this.Cms1_画面透過_0per_Click);
 			// 
 			// Cms1_画面透過_25per
 			// 
 			this.Cms1_画面透過_25per.Name = "Cms1_画面透過_25per";
-			this.Cms1_画面透過_25per.Size = new System.Drawing.Size(96, 22);
+			this.Cms1_画面透過_25per.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_画面透過_25per.Text = "25%";
 			this.Cms1_画面透過_25per.Click += new System.EventHandler(this.Cms1_画面透過_25per_Click);
 			// 
 			// Cms1_画面透過_50per
 			// 
 			this.Cms1_画面透過_50per.Name = "Cms1_画面透過_50per";
-			this.Cms1_画面透過_50per.Size = new System.Drawing.Size(96, 22);
+			this.Cms1_画面透過_50per.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_画面透過_50per.Text = "50%";
 			this.Cms1_画面透過_50per.Click += new System.EventHandler(this.Cms1_画面透過_50per_Click);
 			// 
 			// Cms1_画面透過_75per
 			// 
 			this.Cms1_画面透過_75per.Name = "Cms1_画面透過_75per";
-			this.Cms1_画面透過_75per.Size = new System.Drawing.Size(96, 22);
+			this.Cms1_画面透過_75per.Size = new System.Drawing.Size(180, 22);
 			this.Cms1_画面透過_75per.Text = "75%";
 			this.Cms1_画面透過_75per.Click += new System.EventHandler(this.Cms1_画面透過_75per_Click);
 			// 
@@ -357,7 +358,7 @@
 			this.toolStripMenuItem2,
 			this.Cms2_直線});
 			this.Cms2.Name = "Cms2";
-			this.Cms2.Size = new System.Drawing.Size(147, 126);
+			this.Cms2.Size = new System.Drawing.Size(149, 126);
 			this.Cms2.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.Cms2_Closed);
 			this.Cms2.Opened += new System.EventHandler(this.Cms2_Opened);
 			this.Cms2.MouseLeave += new System.EventHandler(this.Cms2_MouseLeave);
@@ -366,7 +367,7 @@
 			// 
 			this.Cms2_四角.Image = ((System.Drawing.Image)(resources.GetObject("Cms2_四角.Image")));
 			this.Cms2_四角.Name = "Cms2_四角";
-			this.Cms2_四角.Size = new System.Drawing.Size(146, 22);
+			this.Cms2_四角.Size = new System.Drawing.Size(148, 22);
 			this.Cms2_四角.Text = "四角";
 			this.Cms2_四角.Click += new System.EventHandler(this.Cms2_四角_Click);
 			// 
@@ -374,20 +375,20 @@
 			// 
 			this.Cms2_円.Image = ((System.Drawing.Image)(resources.GetObject("Cms2_円.Image")));
 			this.Cms2_円.Name = "Cms2_円";
-			this.Cms2_円.Size = new System.Drawing.Size(146, 22);
+			this.Cms2_円.Size = new System.Drawing.Size(148, 22);
 			this.Cms2_円.Text = "円";
 			this.Cms2_円.Click += new System.EventHandler(this.Cms2_円_Click);
 			// 
 			// toolStripMenuItem1
 			// 
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(143, 6);
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(145, 6);
 			// 
 			// Cms2_矢印
 			// 
 			this.Cms2_矢印.Image = ((System.Drawing.Image)(resources.GetObject("Cms2_矢印.Image")));
 			this.Cms2_矢印.Name = "Cms2_矢印";
-			this.Cms2_矢印.Size = new System.Drawing.Size(146, 22);
+			this.Cms2_矢印.Size = new System.Drawing.Size(148, 22);
 			this.Cms2_矢印.Text = "矢印";
 			this.Cms2_矢印.Click += new System.EventHandler(this.Cms2_矢印_Click);
 			// 
@@ -395,20 +396,20 @@
 			// 
 			this.Cms2_矢印両端.Image = ((System.Drawing.Image)(resources.GetObject("Cms2_矢印両端.Image")));
 			this.Cms2_矢印両端.Name = "Cms2_矢印両端";
-			this.Cms2_矢印両端.Size = new System.Drawing.Size(146, 22);
+			this.Cms2_矢印両端.Size = new System.Drawing.Size(148, 22);
 			this.Cms2_矢印両端.Text = "矢印（両端）";
 			this.Cms2_矢印両端.Click += new System.EventHandler(this.Cms2_矢印両端_Click);
 			// 
 			// toolStripMenuItem2
 			// 
 			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-			this.toolStripMenuItem2.Size = new System.Drawing.Size(143, 6);
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(145, 6);
 			// 
 			// Cms2_直線
 			// 
 			this.Cms2_直線.Image = ((System.Drawing.Image)(resources.GetObject("Cms2_直線.Image")));
 			this.Cms2_直線.Name = "Cms2_直線";
-			this.Cms2_直線.Size = new System.Drawing.Size(146, 22);
+			this.Cms2_直線.Size = new System.Drawing.Size(148, 22);
 			this.Cms2_直線.Text = "直線";
 			this.Cms2_直線.Click += new System.EventHandler(this.Cms2_直線_Click);
 			// 

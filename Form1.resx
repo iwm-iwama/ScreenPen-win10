@@ -129,55 +129,6 @@
         c5zbACvnhuxy4S/KAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="Cms1_マーカー色0.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAACRJREFUOE9j+E8hoJ4Bb2VUSMIwMGrAqAEgMJwMIBdQaMD//wAE+vcfyHs2OwAA
-        AABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="Cms1_マーカー色1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAFNJREFUOE+tjDEKwDAQw/L/T1+7yHQwgiYRCDQYrznk3sF664+QbCMTkm1kQrKN
-        TEi2kQnJNjIh2UYmJNvIhGQbmZBsIxOSbWRCso1M+OQehwczD2Vg3T/77LlvAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="Cms1_マーカー色2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAFFJREFUOE+tjMEJwDAQw7r/0lcCAgd/RJsIBHoYP3PIxYNVX4RkD0xI9sCEZA9M
-        SPbAhGQPTEj2wIRkD0xI9sCEZA9MSPbAhGQPTNjyH4cHMy+pJGy+nMfNsQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="Cms1_マーカー色3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAACJJREFUOE9j+E8hoJ4BDCRCGBg1YNQAEBhOBpALKDTg/38A9NDdPwYl7oEAAAAA
-        SUVORK5CYII=
-</value>
-  </data>
-  <data name="Cms1_マーカー色4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAFRJREFUOE+tjMEJwDAQw7L/uF3g0odAH2NoE4FAD+M1h1w8eN78Ilhp1AQrjZpg
-        pVETrDRqgpVGTbDSqAlWGjXBSqMmWGnUBCuNmmClUROsnxwezGxZmmVuon6QgAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="Cms1_マーカー色5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAACNJREFUOE9j+E8hoKIB9eqkYSgYNWDUABAYVgaQCSg04P9/AFMxOq4dElVfAAAA
-        AElFTkSuQmCC
-</value>
-  </data>
-  <data name="Cms1_マーカー色6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAACRJREFUOE9j+E8hoJ4BDOvek4RhYNSAUQNAYDgZQC6g0ID//wEsazYuoAWrcQAA
-        AABJRU5ErkJggg==
-</value>
-  </data>
   <data name="Cms1_マーカー色.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAZtJREFUOE+t
@@ -259,6 +210,55 @@
         ikE3+hIW0JlJC5B/oSltNOe13yZADTR+G6OHoVKyXcxaMZGt92xUgu1oyCmQTF9DklquSyyk2ByIDKLd
         zJqLzQEbItjkjC6o2Ay4gO5dQDpC6OTp/N6AnXl5zJ2wKMSKJNw4LjhDch8JsO+ea9EAtaz5Iwg5AM1p
         r4pm4mCyAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="Cms1_マーカー色0.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAACRJREFUOE9j+E8hoJ4Bb2VUSMIwMGrAqAEgMJwMIBdQaMD//wAE+vcfyHs2OwAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="Cms1_マーカー色1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAFNJREFUOE+tjDEKwDAQw/L/T1+7yHQwgiYRCDQYrznk3sF664+QbCMTkm1kQrKN
+        TEi2kQnJNjIh2UYmJNvIhGQbmZBsIxOSbWRCso1M+OQehwczD2Vg3T/77LlvAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="Cms1_マーカー色2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAFFJREFUOE+tjMEJwDAQw7r/0lcCAgd/RJsIBHoYP3PIxYNVX4RkD0xI9sCEZA9M
+        SPbAhGQPTEj2wIRkD0xI9sCEZA9MSPbAhGQPTNjyH4cHMy+pJGy+nMfNsQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="Cms1_マーカー色3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAACJJREFUOE9j+E8hoJ4BDCRCGBg1YNQAEBhOBpALKDTg/38A9NDdPwYl7oEAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
+  <data name="Cms1_マーカー色4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAFRJREFUOE+tjMEJwDAQw7L/uF3g0odAH2NoE4FAD+M1h1w8eN78Ilhp1AQrjZpg
+        pVETrDRqgpVGTbDSqAlWGjXBSqMmWGnUBCuNmmClUROsnxwezGxZmmVuon6QgAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="Cms1_マーカー色5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAACNJREFUOE9j+E8hoKIB9eqkYSgYNWDUABAYVgaQCSg04P9/AFMxOq4dElVfAAAA
+        AElFTkSuQmCC
+</value>
+  </data>
+  <data name="Cms1_マーカー色6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAACRJREFUOE9j+E8hoJ4BDOvek4RhYNSAUQNAYDgZQC6g0ID//wEsazYuoAWrcQAA
+        AABJRU5ErkJggg==
 </value>
   </data>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

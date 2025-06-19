@@ -10,7 +10,7 @@ namespace iwm_ScreenPen
 	public partial class Form1: Form
 	{
 		private const string COPYRIGHT = "(C)2022-2025 iwm-iwama";
-		private const string VERSION = "iwm_ScreenPen_20250611";
+		private const string VERSION = "iwm_ScreenPen_20250620";
 
 		private static readonly Color[] GblAryMarkerColor = {
 			Color.Red,     // [0]
@@ -145,15 +145,21 @@ namespace iwm_ScreenPen
 				"        フリーハンド描画\n" +
 				"    [左ダブルクリック]\n" +
 				"        四角／円／矢印／線を描画\n" +
-				"        描画種を選択、マウスカーソルで範囲指定、左クリックで決定\n" +
+				"        描画種を選択、[マウスカーソル]で範囲指定、[左クリック]で決定\n" +
 				"    [マウスホイール]\n" +
 				"        拡大率を変更\n" +
+				"    [マウスカーソル]を画面端に移動\n" +
+				"        背後画面を表示\n" +
 				"\n" +
 				"・キー操作\n" +
+				"    [ESC]\n" +
+				"        最小化\n" +
 				"    [F1]\n" +
 				"        操作説明を表示／非表示\n" +
+				"    [PageUp／PageDown]\n" +
+				"        拡大する／100%に戻す\n" +
 				"    [Up／Down]\n" +
-				"        透過率を下げる／上げる\n" +
+				"        透過率を上げる／下げる\n" +
 				"    [Left／Right]\n" +
 				"        前／次の履歴画面へ移動\n" +
 				"    [Space]\n" +
@@ -169,9 +175,25 @@ namespace iwm_ScreenPen
 			Cms1.Show(Cursor.Position);
 		}
 
-		private void PictureBox1_MouseEnter(object sender, EventArgs e)
+		private double Gbl_Opacity = 1.0F;
+		private readonly int Gbl_PrimaryScreenX = Screen.PrimaryScreen.Bounds.Width - 1;
+		private readonly int Gbl_PrimaryScreenY = Screen.PrimaryScreen.Bounds.Height - 1;
+
+		private void PictureBox1_MouseHover(object sender, EventArgs e)
 		{
+			Opacity = Gbl_Opacity;
+			// キー操作に影響
 			_ = PictureBox1.Focus();
+		}
+
+		private void PictureBox1_MouseLeave(object sender, EventArgs e)
+		{
+			if (Cursor.Position.X == 0 || Cursor.Position.X == Gbl_PrimaryScreenX || Cursor.Position.Y == 0 || Cursor.Position.Y == Gbl_PrimaryScreenY)
+			{
+				Gbl_Opacity = Opacity;
+				// 0.00以下だと操作不能になる!!
+				Opacity = 0.01F;
+			}
 		}
 
 		private bool Gbl_PictureBox1_DoubleClick_On = false;
@@ -404,29 +426,48 @@ namespace iwm_ScreenPen
 		{
 			switch (e.KeyCode)
 			{
+				// 最小化
+				case Keys.Escape:
+					Cms1_最小化_Click(sender, e);
+					break;
+
 				// 操作説明
 				case Keys.F1:
 					Cms1_操作説明_Click(sender, e);
 					break;
 
-				// 透過率 -25%
-				case Keys.Up:
-					Opacity += 0.25F;
-					if (Opacity > 1.0F)
-					{
-						Opacity = 1.0F;
-					}
-					SubPictureBox1Tooltip($"透過率 {(1.0F - Opacity) * 100}%");
-					break;
+				// 表示を拡大
+				case Keys.PageUp:
+					SubImageResize(true);
+					// 必ず return
+					return;
+
+				// 表示を100%に戻す
+				case Keys.PageDown:
+					SubImageResize(false);
+					// 必ず return
+					return;
 
 				// 透過率 +25%
-				case Keys.Down:
+				case Keys.Up:
 					Opacity -= 0.25F;
 					if (Opacity < 0.25F)
 					{
 						Opacity = 0.25F;
 					}
 					SubPictureBox1Tooltip($"透過率 {(1.0F - Opacity) * 100}%");
+					Gbl_Opacity = Opacity;
+					break;
+
+				// 透過率 -25%
+				case Keys.Down:
+					Opacity += 0.25F;
+					if (Opacity > 1.0F)
+					{
+						Opacity = 1.0F;
+					}
+					SubPictureBox1Tooltip($"透過率 {(1.0F - Opacity) * 100}%");
+					Gbl_Opacity = Opacity;
 					break;
 
 				// Undo
@@ -520,12 +561,12 @@ namespace iwm_ScreenPen
 			if (LblHelp.Visible)
 			{
 				LblHelp.Visible = false;
-				PictureBox1.Focus();
+				_ = PictureBox1.Focus();
 			}
 			else
 			{
 				LblHelp.Visible = true;
-				LblHelp.Focus();
+				_ = LblHelp.Focus();
 			}
 		}
 
@@ -592,21 +633,25 @@ namespace iwm_ScreenPen
 		private void Cms1_画面透過_0per_Click(object sender, EventArgs e)
 		{
 			Opacity = 1.0F;
+			Gbl_Opacity = Opacity;
 		}
 
 		private void Cms1_画面透過_25per_Click(object sender, EventArgs e)
 		{
 			Opacity = 0.75F;
+			Gbl_Opacity = Opacity;
 		}
 
 		private void Cms1_画面透過_50per_Click(object sender, EventArgs e)
 		{
 			Opacity = 0.5F;
+			Gbl_Opacity = Opacity;
 		}
 
 		private void Cms1_画面透過_75per_Click(object sender, EventArgs e)
 		{
 			Opacity = 0.25F;
+			Gbl_Opacity = Opacity;
 		}
 
 		private void Cms1_スクリーンショット_Click(object sender, EventArgs e)
@@ -649,17 +694,29 @@ namespace iwm_ScreenPen
 
 		private void Cms1_画像を保存_Click(object sender, EventArgs e)
 		{
+			string[] aImgExt = {
+				 "PNG - Portable Network Graphics (*.png)|*.png", // [1]
+				 "JPG - JPG/JPEG Format (*.jpg)|*.jpg"            // [2]
+			};
+
 			SaveFileDialog sfd = new SaveFileDialog
 			{
 				FileName = DateTime.Now.ToString("yyyyMMdd_HHmmss"),
-				Filter = "PNG - Portable Network Graphics (*.png)|*.png",
+				Filter = string.Join("|", aImgExt),
 				FilterIndex = 1,
 				InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
 			};
 
 			if (sfd.ShowDialog() == DialogResult.OK)
 			{
-				Bitmap1.Save(sfd.FileName, System.Drawing.Imaging.ImageFormat.Png);
+				// PNG
+				System.Drawing.Imaging.ImageFormat imgFormat = System.Drawing.Imaging.ImageFormat.Png;
+				// JPEG
+				if (sfd.FilterIndex == 2)
+				{
+					imgFormat = System.Drawing.Imaging.ImageFormat.Jpeg;
+				}
+				Bitmap1.Save(sfd.FileName, imgFormat);
 			}
 		}
 
