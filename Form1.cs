@@ -10,7 +10,7 @@ namespace iwm_ScreenPen
 	public partial class Form1: Form
 	{
 		private const string COPYRIGHT = "(C)2022-2025 iwm-iwama";
-		private const string VERSION = "iwm_ScreenPen_20250620";
+		private const string VERSION = "iwm_ScreenPen_20250630";
 
 		private static readonly Color[] GblAryMarkerColor = {
 			Color.Red,     // [0]
@@ -429,23 +429,21 @@ namespace iwm_ScreenPen
 				// 最小化
 				case Keys.Escape:
 					Cms1_最小化_Click(sender, e);
-					break;
+					return;
 
 				// 操作説明
 				case Keys.F1:
 					Cms1_操作説明_Click(sender, e);
-					break;
+					return;
 
 				// 表示を拡大
 				case Keys.PageUp:
 					SubImageResize(true);
-					// 必ず return
 					return;
 
 				// 表示を100%に戻す
 				case Keys.PageDown:
 					SubImageResize(false);
-					// 必ず return
 					return;
 
 				// 透過率 +25%
@@ -457,7 +455,7 @@ namespace iwm_ScreenPen
 					}
 					SubPictureBox1Tooltip($"透過率 {(1.0F - Opacity) * 100}%");
 					Gbl_Opacity = Opacity;
-					break;
+					return;
 
 				// 透過率 -25%
 				case Keys.Down:
@@ -468,7 +466,7 @@ namespace iwm_ScreenPen
 					}
 					SubPictureBox1Tooltip($"透過率 {(1.0F - Opacity) * 100}%");
 					Gbl_Opacity = Opacity;
-					break;
+					return;
 
 				// Undo
 				case Keys.Left:
@@ -493,12 +491,16 @@ namespace iwm_ScreenPen
 				// スクリーンショット
 				case Keys.Space:
 					Cms1_スクリーンショット_Click(sender, null);
-					break;
+					return;
 			}
 
+			// 再描画／不要なときは前述 switch() で return
 			Graphics1.DrawImage(ListBitmap[ListBitmapCurIndex], 0, 0);
 			PictureBox1.BackgroundImage = Bitmap1;
 			PictureBox1.Refresh();
+
+			// 100%画面に戻す
+			AryImageResizeIndex = 0;
 		}
 
 		private void Cms1_Opened(object sender, EventArgs e)
